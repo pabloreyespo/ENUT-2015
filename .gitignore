@@ -1,4 +1,2 @@
-output/FMNL-epf-viii_iterations.csv
-output/FMNL-epf-viii_estimates.csv
 data/raw/*
 !data/raw/raw.zip
