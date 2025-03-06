@@ -83,7 +83,8 @@ ingresos     <- c("ing_ocuppal", "ing_trab", "ing_jub_aps", "ing_g", "ing_mon", 
 tipo_muestra <- c("es_trabajador", "es_familia")
 
 new_variables_prefilter<- function(data) { # OJO, DEBEN ENTRAR TODOS INDEPENDIENTE DE SI DECLARAN TIEMPO O NO
-  act_s_domestico <- c("f12_1_1","f15_1_1","f15_1_2","f15_1_3","f16_1_1","f16_1_2","f16_1_3","f22_1_1","f27_1_1","f27_1_2","f27_1_3","f28_1_1","f28_1_2","f28_1_3")
+  act_s_domestico <- c("f12_1_1","f15_1_1","f15_1_2","f15_1_3","f16_1_1","f16_1_2","f16_1_3","f22_1_1","f27_1_1",
+                       "f27_1_2","f27_1_3","f28_1_1","f28_1_2","f28_1_3", 'f11_1_1', 'f21_1_1')
   recibe_servicio_domestico <- c("f11_1_1","f21_1_1")
 
   # INFORMACIÓN DEL INDIVIDUO
