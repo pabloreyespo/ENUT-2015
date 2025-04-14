@@ -1,0 +1,789 @@
+Model run by pablo using Apollo 0.3.4 on R 4.4.3 for Windows.
+Please acknowledge the use of Apollo by citing Hess & Palma (2019)
+  DOI 10.1016/j.jocm.2019.100170
+  www.ApolloChoiceModelling.com
+
+Model name                                  : ENUT-THPHNTNE
+Model description                           : Jara-Diaz model
+Model run at                                : 2025-04-12 12:44:26.064352
+Estimation method                           : bgw
+Model diagnosis                             : Relative function convergence
+Optimisation diagnosis                      : Maximum found
+     hessian properties                     : Negative definite
+     maximum eigenvalue                     : -5.147299
+     reciprocal of condition number         : 2.4371e-06
+Number of individuals                       : 4364
+Number of rows in database                  : 4364
+Number of modelled outcomes                 : 0
+
+Number of cores used                        :  1 
+Model without mixing
+
+LL(start)                                   : 0
+LL at equal shares, LL(0)                   : NA
+LL at observed shares, LL(C)                : NA
+LL(final)                                   : -76470.22
+Rho-squared vs equal shares                  :  Not applicable 
+Adj.Rho-squared vs equal shares              :  Not applicable 
+Rho-squared vs observed shares               :  Not applicable 
+Adj.Rho-squared vs observed shares           :  Not applicable 
+AIC                                         :  152970.4 
+BIC                                         :  -Inf 
+
+Estimated parameters                        : 15
+Time taken (hh:mm:ss)                       :  00:00:14.89 
+     pre-estimation                         :  00:00:0.37 
+     estimation                             :  00:00:10.14 
+     post-estimation                        :  00:00:4.38 
+Iterations                                  :  97  
+
+Unconstrained optimisation.
+
+Estimates:
+ [1] "t_to"           "t_to_js"        "t_tcnr_ce"      "t_tcnr_re"     
+ [5] "t_tcnr_oac"     "t_tdnr_psc"     "t_tdnr_lv"      "t_tdnr_lrc"    
+ [9] "t_tdnr_mrm"     "t_tdnr_admnhog" "t_tdnr_comphog" "t_tdnr_cmp"    
+[13] "t_tvaoh_tv"     "t_tvaoh_oh"     "t_cpaf_cp"      "t_cpag_comer"  
+[17] "t_cpag_dormir"  "t_ed"           "t_vsyo_csar"    "t_vsyo_aa"     
+ [1] "alimentos"      "recreacion"     "restaurantes"   "comunicaciones"
+ [5] "vestimenta"     "cuentas"        "hogar"          "salud"         
+ [9] "transporte"     "educacion"     
+                         PH                     theta_w 
+                 0.51909595                  0.92521603 
+theta_leisure_socialization       theta_leisure_hobbies 
+                 0.13167059                  0.24499574 
+      theta_leisure_reading         theta_leisure_audio 
+                 0.05407406                  0.23636591 
+        theta_leisure_video                       phi_1 
+                 0.13993908                  0.10928812 
+                    sigma_1                     sigma_2 
+                30.00000000                 30.00000000 
+                    sigma_3                     sigma_4 
+                30.00000000                 30.00000000 
+                    sigma_5                     sigma_6 
+                30.00000000                 30.00000000 
+                    sigma_7                      rho_12 
+                30.00000000                  0.00000000 
+                     rho_13                      rho_14 
+                 0.00000000                  0.00000000 
+                     rho_15                      rho_16 
+                 0.00000000                  0.00000000 
+ [1] "rho_12" "rho_13" "rho_14" "rho_15" "rho_16" "rho_17" "rho_23" "rho_24"
+ [9] "rho_25" "rho_26" "rho_27" "rho_34" "rho_35" "rho_36" "rho_37" "rho_45"
+[17] "rho_46" "rho_47" "rho_56" "rho_57"
+[1] "rho_67"
+[1] -76470.22
+[1] "#0071b2" "#009e74" "#e69f00" "#d55e00"
+[1] TRUE
+[1] "Ef1" "Ef2" "Ec" 
+[1] 6
+[1] 36
+[1] "phi_1"
+ [1] "rho_12" "rho_13" "rho_14" "rho_15" "rho_16" "rho_17" "rho_23" "rho_24"
+ [9] "rho_25" "rho_26" "rho_27" "rho_34" "rho_35" "rho_36" "rho_37" "rho_45"
+[17] "rho_46" "rho_47" "rho_56" "rho_57"
+[1] "sigma_1" "sigma_2" "sigma_3" "sigma_4" "sigma_5" "sigma_6" "sigma_7"
+[1] "theta_leisure_socialization" "theta_leisure_hobbies"      
+[3] "theta_leisure_reading"       "theta_leisure_audio"        
+[5] "theta_leisure_video"        
+[1] "ENUT-THPHNTNE"
+[1] "results/ENUT-THPHNTNE.csv"
+[1] 7
+[1] 1
+[1] 6
+[1] 100
+[1] "t_paid_work"             "t_leisure_socialization"
+[3] "t_leisure_hobbies"       "t_leisure_reading"      
+[5] "t_leisure_audio"         "t_leisure_video"        
+[7] "t_leisure_computer"      "Tc"                     
+                               Estimate        s.e.   t.rat.(0)    Rob.s.e. Rob.t.rat.(0)
+PH                              2.23976    0.110930       20.19    0.295186         7.588
+theta_w                        -5.53410    0.341001      -16.23    1.068086        -5.181
+theta_leisure_socialization     0.28646    0.002933       97.67    0.004606        62.191
+theta_leisure_hobbies           0.04404    0.001139       38.66    0.001538        28.632
+theta_leisure_reading           0.02851  7.0163e-04       40.64  8.4051e-04        33.924
+theta_leisure_audio             0.22161    0.003047       72.74    0.004241        52.260
+theta_leisure_video             0.19344    0.002409       80.30    0.003360        57.577
+phi_1                           2.85652    0.161514       17.69    0.496428         5.754
+sigma_1                        14.40693    0.181666       79.30    0.379950        37.918
+sigma_2                         8.02917    0.086295       93.04    0.105191        76.330
+sigma_3                         3.46446    0.037088       93.41    0.138950        24.933
+sigma_4                         2.13773    0.022886       93.41    0.061596        34.706
+sigma_5                         8.85544    0.094854       93.36    0.118709        74.598
+sigma_6                         6.90966    0.074180       93.15    0.113661        60.792
+sigma_7                        23.47666    0.299744       78.32    0.698591        33.606
+rho_12                          0.00000          NA          NA          NA            NA
+rho_13                          0.00000          NA          NA          NA            NA
+rho_14                          0.00000          NA          NA          NA            NA
+rho_15                          0.00000          NA          NA          NA            NA
+rho_16                          0.00000          NA          NA          NA            NA
+rho_17                          0.00000          NA          NA          NA            NA
+rho_23                          0.00000          NA          NA          NA            NA
+rho_24                          0.00000          NA          NA          NA            NA
+rho_25                          0.00000          NA          NA          NA            NA
+rho_26                          0.00000          NA          NA          NA            NA
+rho_27                          0.00000          NA          NA          NA            NA
+rho_34                          0.00000          NA          NA          NA            NA
+rho_35                          0.00000          NA          NA          NA            NA
+rho_36                          0.00000          NA          NA          NA            NA
+rho_37                          0.00000          NA          NA          NA            NA
+rho_45                          0.00000          NA          NA          NA            NA
+rho_46                          0.00000          NA          NA          NA            NA
+rho_47                          0.00000          NA          NA          NA            NA
+rho_56                          0.00000          NA          NA          NA            NA
+rho_57                          0.00000          NA          NA          NA            NA
+rho_67                          0.00000          NA          NA          NA            NA
+
+
+Classical covariance matrix:
+                                                     PH                     theta_w
+PH                                             0.012305                   -0.036093
+theta_w                                       -0.036093                    0.116282
+theta_leisure_socialization                  -2.129e-05                  2.0263e-04
+theta_leisure_hobbies                        -3.038e-06                   3.252e-05
+theta_leisure_reading                        -2.320e-06                   2.064e-05
+theta_leisure_audio                          -1.515e-05                  1.5337e-04
+theta_leisure_video                          -1.673e-05                  1.4228e-04
+phi_1                                          0.016441                   -0.054579
+sigma_1                                        0.005305                   -0.024059
+sigma_2                                      7.0173e-04                   -0.001597
+sigma_3                                       3.182e-05                 -1.2607e-04
+sigma_4                                       3.203e-05                  -7.331e-05
+sigma_5                                      3.0748e-04                 -6.7915e-04
+sigma_6                                      5.1746e-04                   -0.001183
+sigma_7                                       -0.013837                    0.051357
+                            theta_leisure_socialization       theta_leisure_hobbies
+PH                                           -2.129e-05                  -3.038e-06
+theta_w                                      2.0263e-04                   3.252e-05
+theta_leisure_socialization                   8.602e-06                   3.230e-07
+theta_leisure_hobbies                         3.230e-07                   1.298e-06
+theta_leisure_reading                         1.902e-07                   3.193e-08
+theta_leisure_audio                           1.492e-06                   2.506e-07
+theta_leisure_video                           1.283e-06                   2.154e-07
+phi_1                                       -1.1397e-04                  -1.846e-05
+sigma_1                                     -1.2355e-04                  -2.057e-05
+sigma_2                                       4.988e-06                   8.716e-07
+sigma_3                                      -4.955e-07                  -8.104e-08
+sigma_4                                       2.223e-07                   3.887e-08
+sigma_5                                       2.465e-06                   4.289e-07
+sigma_6                                       3.604e-06                   6.301e-07
+sigma_7                                      1.6888e-04                   2.783e-05
+                                  theta_leisure_reading         theta_leisure_audio
+PH                                           -2.320e-06                  -1.515e-05
+theta_w                                       2.064e-05                  1.5337e-04
+theta_leisure_socialization                   1.902e-07                   1.492e-06
+theta_leisure_hobbies                         3.193e-08                   2.506e-07
+theta_leisure_reading                         4.923e-07                   1.475e-07
+theta_leisure_audio                           1.475e-07                   9.283e-06
+theta_leisure_video                           1.269e-07                   9.952e-07
+phi_1                                        -1.154e-05                  -8.670e-05
+sigma_1                                      -1.229e-05                  -9.541e-05
+sigma_2                                       4.799e-07                   3.957e-06
+sigma_3                                      -4.947e-08                  -3.814e-07
+sigma_4                                       2.168e-08                   1.764e-07
+sigma_5                                       2.378e-07                   1.948e-06
+sigma_6                                       3.465e-07                   2.859e-06
+sigma_7                                       1.691e-05                  1.2967e-04
+                                    theta_leisure_video                       phi_1
+PH                                           -1.673e-05                     0.01644
+theta_w                                      1.4228e-04                    -0.05458
+theta_leisure_socialization                   1.283e-06                 -1.1397e-04
+theta_leisure_hobbies                         2.154e-07                  -1.846e-05
+theta_leisure_reading                         1.269e-07                  -1.154e-05
+theta_leisure_audio                           9.952e-07                  -8.670e-05
+theta_leisure_video                           5.803e-06                  -7.921e-05
+phi_1                                        -7.921e-05                     0.02609
+sigma_1                                      -8.325e-05                     0.01227
+sigma_2                                       3.170e-06                  6.5632e-04
+sigma_3                                      -3.361e-07                   6.248e-05
+sigma_4                                       1.411e-07                   3.021e-05
+sigma_5                                       1.574e-06                  2.7495e-04
+sigma_6                                       2.287e-06                  4.8739e-04
+sigma_7                                      1.1518e-04                    -0.02506
+                                                sigma_1                     sigma_2
+PH                                             0.005305                  7.0173e-04
+theta_w                                       -0.024059                   -0.001597
+theta_leisure_socialization                 -1.2355e-04                   4.988e-06
+theta_leisure_hobbies                        -2.057e-05                   8.716e-07
+theta_leisure_reading                        -1.229e-05                   4.799e-07
+theta_leisure_audio                          -9.541e-05                   3.957e-06
+theta_leisure_video                          -8.325e-05                   3.170e-06
+phi_1                                          0.012273                  6.5632e-04
+sigma_1                                        0.033003                  -7.362e-05
+sigma_2                                      -7.362e-05                    0.007447
+sigma_3                                       4.042e-05                   3.661e-07
+sigma_4                                      -3.029e-06                   2.740e-06
+sigma_5                                      -4.915e-05                   2.739e-05
+sigma_6                                      -4.973e-05                   4.430e-05
+sigma_7                                       -0.014753                 -3.1240e-04
+                                                sigma_3                     sigma_4
+PH                                            3.182e-05                   3.203e-05
+theta_w                                     -1.2607e-04                  -7.331e-05
+theta_leisure_socialization                  -4.955e-07                   2.223e-07
+theta_leisure_hobbies                        -8.104e-08                   3.887e-08
+theta_leisure_reading                        -4.947e-08                   2.168e-08
+theta_leisure_audio                          -3.814e-07                   1.764e-07
+theta_leisure_video                          -3.361e-07                   1.411e-07
+phi_1                                         6.248e-05                   3.021e-05
+sigma_1                                       4.042e-05                  -3.029e-06
+sigma_2                                       3.661e-07                   2.740e-06
+sigma_3                                        0.001376                   1.799e-08
+sigma_4                                       1.799e-08                  5.2376e-04
+sigma_5                                       9.538e-08                   1.242e-06
+sigma_6                                       2.875e-07                   2.009e-06
+sigma_7                                      -6.962e-05                  -1.468e-05
+                                                sigma_5                     sigma_6
+PH                                           3.0748e-04                  5.1746e-04
+theta_w                                     -6.7915e-04                   -0.001183
+theta_leisure_socialization                   2.465e-06                   3.604e-06
+theta_leisure_hobbies                         4.289e-07                   6.301e-07
+theta_leisure_reading                         2.378e-07                   3.465e-07
+theta_leisure_audio                           1.948e-06                   2.859e-06
+theta_leisure_video                           1.574e-06                   2.287e-06
+phi_1                                        2.7495e-04                  4.8739e-04
+sigma_1                                      -4.915e-05                  -4.973e-05
+sigma_2                                       2.739e-05                   4.430e-05
+sigma_3                                       9.538e-08                   2.875e-07
+sigma_4                                       1.242e-06                   2.009e-06
+sigma_5                                        0.008997                   2.008e-05
+sigma_6                                       2.008e-05                    0.005503
+sigma_7                                     -1.1548e-04                 -2.3615e-04
+                                                sigma_7
+PH                                             -0.01384
+theta_w                                         0.05136
+theta_leisure_socialization                  1.6888e-04
+theta_leisure_hobbies                         2.783e-05
+theta_leisure_reading                         1.691e-05
+theta_leisure_audio                          1.2967e-04
+theta_leisure_video                          1.1518e-04
+phi_1                                          -0.02506
+sigma_1                                        -0.01475
+sigma_2                                     -3.1240e-04
+sigma_3                                      -6.962e-05
+sigma_4                                      -1.468e-05
+sigma_5                                     -1.1548e-04
+sigma_6                                     -2.3615e-04
+sigma_7                                         0.08985
+
+Robust covariance matrix:
+                                                     PH                     theta_w
+PH                                             0.087135                   -0.311373
+theta_w                                       -0.311373                    1.140808
+theta_leisure_socialization                 -9.3321e-04                    0.003634
+theta_leisure_hobbies                       -1.4432e-04                  5.6366e-04
+theta_leisure_reading                        -8.976e-05                  3.5058e-04
+theta_leisure_audio                         -7.0148e-04                    0.002735
+theta_leisure_video                         -6.2786e-04                    0.002435
+phi_1                                          0.143088                   -0.528877
+sigma_1                                        0.079940                   -0.318694
+sigma_2                                        0.004056                   -0.015169
+sigma_3                                      8.0500e-04                   -0.003178
+sigma_4                                      4.5470e-04                   -0.001435
+sigma_5                                      7.7912e-04                   -0.004158
+sigma_6                                        0.002374                   -0.008773
+sigma_7                                       -0.127464                    0.483471
+                            theta_leisure_socialization       theta_leisure_hobbies
+PH                                          -9.3321e-04                 -1.4432e-04
+theta_w                                        0.003634                  5.6366e-04
+theta_leisure_socialization                   2.122e-05                   2.000e-06
+theta_leisure_hobbies                         2.000e-06                   2.366e-06
+theta_leisure_reading                         1.231e-06                   2.440e-07
+theta_leisure_audio                           7.005e-06                   5.839e-07
+theta_leisure_video                           8.316e-06                   8.359e-07
+phi_1                                         -0.001720                 -2.6739e-04
+sigma_1                                       -0.001368                 -2.0981e-04
+sigma_2                                       2.403e-05                  -6.805e-06
+sigma_3                                      -4.936e-05                  1.5563e-04
+sigma_4                                      -1.328e-05                   3.904e-06
+sigma_5                                      -9.412e-05                  -1.667e-05
+sigma_6                                      -6.518e-05                  -8.792e-06
+sigma_7                                        0.001551                  2.3650e-04
+                                  theta_leisure_reading         theta_leisure_audio
+PH                                           -8.976e-05                 -7.0148e-04
+theta_w                                      3.5058e-04                    0.002735
+theta_leisure_socialization                   1.231e-06                   7.005e-06
+theta_leisure_hobbies                         2.440e-07                   5.839e-07
+theta_leisure_reading                         7.065e-07                   6.313e-07
+theta_leisure_audio                           6.313e-07                   1.798e-05
+theta_leisure_video                           8.140e-07                   4.488e-06
+phi_1                                       -1.6707e-04                   -0.001293
+sigma_1                                     -1.2865e-04                   -0.001019
+sigma_2                                      -1.128e-05                  -6.984e-05
+sigma_3                                       8.767e-07                  -6.198e-05
+sigma_4                                       3.494e-05                  -2.267e-05
+sigma_5                                      -1.044e-05                  1.7305e-04
+sigma_6                                      -6.541e-06                  -5.808e-05
+sigma_7                                      1.7572e-04                    0.001151
+                                    theta_leisure_video                       phi_1
+PH                                          -6.2786e-04                    0.143088
+theta_w                                        0.002435                   -0.528877
+theta_leisure_socialization                   8.316e-06                   -0.001720
+theta_leisure_hobbies                         8.359e-07                 -2.6739e-04
+theta_leisure_reading                         8.140e-07                 -1.6707e-04
+theta_leisure_audio                           4.488e-06                   -0.001293
+theta_leisure_video                           1.129e-05                   -0.001148
+phi_1                                         -0.001148                    0.246441
+sigma_1                                     -8.8106e-04                    0.151638
+sigma_2                                      -6.112e-05                    0.006981
+sigma_3                                      -4.879e-05                    0.001511
+sigma_4                                      -6.787e-06                  6.0488e-04
+sigma_5                                      -5.609e-05                    0.002087
+sigma_6                                       9.908e-05                    0.004150
+sigma_7                                        0.001045                   -0.232280
+                                                sigma_1                     sigma_2
+PH                                             0.079940                    0.004056
+theta_w                                       -0.318694                   -0.015169
+theta_leisure_socialization                   -0.001368                   2.403e-05
+theta_leisure_hobbies                       -2.0981e-04                  -6.805e-06
+theta_leisure_reading                       -1.2865e-04                  -1.128e-05
+theta_leisure_audio                           -0.001019                  -6.984e-05
+theta_leisure_video                         -8.8106e-04                  -6.112e-05
+phi_1                                          0.151638                    0.006981
+sigma_1                                        0.144362                    0.008226
+sigma_2                                        0.008226                    0.011065
+sigma_3                                        0.001426                  7.5372e-04
+sigma_4                                      3.4689e-04                  -1.457e-06
+sigma_5                                        0.005200                  8.9593e-04
+sigma_6                                        0.004938                  6.7050e-04
+sigma_7                                       -0.117491                   -0.002246
+                                                sigma_3                     sigma_4
+PH                                           8.0500e-04                  4.5470e-04
+theta_w                                       -0.003178                   -0.001435
+theta_leisure_socialization                  -4.936e-05                  -1.328e-05
+theta_leisure_hobbies                        1.5563e-04                   3.904e-06
+theta_leisure_reading                         8.767e-07                   3.494e-05
+theta_leisure_audio                          -6.198e-05                  -2.267e-05
+theta_leisure_video                          -4.879e-05                  -6.787e-06
+phi_1                                          0.001511                  6.0488e-04
+sigma_1                                        0.001426                  3.4689e-04
+sigma_2                                      7.5372e-04                  -1.457e-06
+sigma_3                                        0.019307                  5.4343e-04
+sigma_4                                      5.4343e-04                    0.003794
+sigma_5                                      2.8235e-04                  -5.293e-05
+sigma_6                                      3.2117e-04                  1.4254e-04
+sigma_7                                       -0.002413                   9.814e-05
+                                                sigma_5                     sigma_6
+PH                                           7.7912e-04                    0.002374
+theta_w                                       -0.004158                   -0.008773
+theta_leisure_socialization                  -9.412e-05                  -6.518e-05
+theta_leisure_hobbies                        -1.667e-05                  -8.792e-06
+theta_leisure_reading                        -1.044e-05                  -6.541e-06
+theta_leisure_audio                          1.7305e-04                  -5.808e-05
+theta_leisure_video                          -5.609e-05                   9.908e-05
+phi_1                                          0.002087                    0.004150
+sigma_1                                        0.005200                    0.004938
+sigma_2                                      8.9593e-04                  6.7050e-04
+sigma_3                                      2.8235e-04                  3.2117e-04
+sigma_4                                      -5.293e-05                  1.4254e-04
+sigma_5                                        0.014092                  4.1432e-04
+sigma_6                                      4.1432e-04                    0.012919
+sigma_7                                       -0.002304                   -0.001375
+                                                sigma_7
+PH                                            -0.127464
+theta_w                                        0.483471
+theta_leisure_socialization                    0.001551
+theta_leisure_hobbies                        2.3650e-04
+theta_leisure_reading                        1.7572e-04
+theta_leisure_audio                            0.001151
+theta_leisure_video                            0.001045
+phi_1                                         -0.232280
+sigma_1                                       -0.117491
+sigma_2                                       -0.002246
+sigma_3                                       -0.002413
+sigma_4                                       9.814e-05
+sigma_5                                       -0.002304
+sigma_6                                       -0.001375
+sigma_7                                        0.488030
+
+Classical correlation matrix:
+                                                     PH                     theta_w
+PH                                             1.000000                   -0.954149
+theta_w                                       -0.954149                    1.000000
+theta_leisure_socialization                   -0.065443                    0.202604
+theta_leisure_hobbies                         -0.024039                    0.083721
+theta_leisure_reading                         -0.029807                    0.086268
+theta_leisure_audio                           -0.044818                    0.147623
+theta_leisure_video                           -0.062606                    0.173200
+phi_1                                          0.917646                   -0.990974
+sigma_1                                        0.263236                   -0.388377
+sigma_2                                        0.073305                   -0.054277
+sigma_3                                        0.007734                   -0.009968
+sigma_4                                        0.012617                   -0.009394
+sigma_5                                        0.029222                   -0.020997
+sigma_6                                        0.062884                   -0.046782
+sigma_7                                       -0.416144                    0.502450
+                            theta_leisure_socialization       theta_leisure_hobbies
+PH                                            -0.065443                   -0.024039
+theta_w                                        0.202604                    0.083721
+theta_leisure_socialization                    1.000000                    0.096659
+theta_leisure_hobbies                          0.096659                    1.000000
+theta_leisure_reading                          0.092412                    0.039947
+theta_leisure_audio                            0.166967                    0.072214
+theta_leisure_video                            0.181592                    0.078479
+phi_1                                         -0.240581                   -0.100349
+sigma_1                                       -0.231870                   -0.099412
+sigma_2                                        0.019706                    0.008866
+sigma_3                                       -0.004555                   -0.001918
+sigma_4                                        0.003311                    0.001491
+sigma_5                                        0.008859                    0.003969
+sigma_6                                        0.016563                    0.007456
+sigma_7                                        0.192093                    0.081498
+                                  theta_leisure_reading         theta_leisure_audio
+PH                                            -0.029807                   -0.044818
+theta_w                                        0.086268                    0.147623
+theta_leisure_socialization                    0.092412                    0.166967
+theta_leisure_hobbies                          0.039947                    0.072214
+theta_leisure_reading                          1.000000                    0.069013
+theta_leisure_audio                            0.069013                    1.000000
+theta_leisure_video                            0.075097                    0.135595
+phi_1                                         -0.101834                   -0.176186
+sigma_1                                       -0.096403                   -0.172379
+sigma_2                                        0.007927                    0.015050
+sigma_3                                       -0.001901                   -0.003376
+sigma_4                                        0.001350                    0.002529
+sigma_5                                        0.003573                    0.006741
+sigma_6                                        0.006657                    0.012652
+sigma_7                                        0.080422                    0.141988
+                                    theta_leisure_video                       phi_1
+PH                                            -0.062606                    0.917646
+theta_w                                        0.173200                   -0.990974
+theta_leisure_socialization                    0.181592                   -0.240581
+theta_leisure_hobbies                          0.078479                   -0.100349
+theta_leisure_reading                          0.075097                   -0.101834
+theta_leisure_audio                            0.135595                   -0.176186
+theta_leisure_video                            1.000000                   -0.203592
+phi_1                                         -0.203592                    1.000000
+sigma_1                                       -0.190239                    0.418285
+sigma_2                                        0.015251                    0.047089
+sigma_3                                       -0.003762                    0.010431
+sigma_4                                        0.002559                    0.008172
+sigma_5                                        0.006890                    0.017947
+sigma_6                                        0.012799                    0.040680
+sigma_7                                        0.159511                   -0.517612
+                                                sigma_1                     sigma_2
+PH                                             0.263236                    0.073305
+theta_w                                       -0.388377                   -0.054277
+theta_leisure_socialization                   -0.231870                    0.019706
+theta_leisure_hobbies                         -0.099412                    0.008866
+theta_leisure_reading                         -0.096403                    0.007927
+theta_leisure_audio                           -0.172379                    0.015050
+theta_leisure_video                           -0.190239                    0.015251
+phi_1                                          0.418285                    0.047089
+sigma_1                                        1.000000                   -0.004696
+sigma_2                                       -0.004696                    1.000000
+sigma_3                                        0.006000                  1.1439e-04
+sigma_4                                     -7.2861e-04                    0.001387
+sigma_5                                       -0.002852                    0.003346
+sigma_6                                       -0.003690                    0.006921
+sigma_7                                       -0.270933                   -0.012078
+                                                sigma_3                     sigma_4
+PH                                             0.007734                    0.012617
+theta_w                                       -0.009968                   -0.009394
+theta_leisure_socialization                   -0.004555                    0.003311
+theta_leisure_hobbies                         -0.001918                    0.001491
+theta_leisure_reading                         -0.001901                    0.001350
+theta_leisure_audio                           -0.003376                    0.002529
+theta_leisure_video                           -0.003762                    0.002559
+phi_1                                          0.010431                    0.008172
+sigma_1                                        0.006000                 -7.2861e-04
+sigma_2                                      1.1439e-04                    0.001387
+sigma_3                                        1.000000                   2.119e-05
+sigma_4                                       2.119e-05                    1.000000
+sigma_5                                       2.711e-05                  5.7193e-04
+sigma_6                                      1.0452e-04                    0.001184
+sigma_7                                       -0.006263                   -0.002140
+                                                sigma_5                     sigma_6
+PH                                             0.029222                    0.062884
+theta_w                                       -0.020997                   -0.046782
+theta_leisure_socialization                    0.008859                    0.016563
+theta_leisure_hobbies                          0.003969                    0.007456
+theta_leisure_reading                          0.003573                    0.006657
+theta_leisure_audio                            0.006741                    0.012652
+theta_leisure_video                            0.006890                    0.012799
+phi_1                                          0.017947                    0.040680
+sigma_1                                       -0.002852                   -0.003690
+sigma_2                                        0.003346                    0.006921
+sigma_3                                       2.711e-05                  1.0452e-04
+sigma_4                                      5.7193e-04                    0.001184
+sigma_5                                        1.000000                    0.002853
+sigma_6                                        0.002853                    1.000000
+sigma_7                                       -0.004062                   -0.010621
+                                                sigma_7
+PH                                            -0.416144
+theta_w                                        0.502450
+theta_leisure_socialization                    0.192093
+theta_leisure_hobbies                          0.081498
+theta_leisure_reading                          0.080422
+theta_leisure_audio                            0.141988
+theta_leisure_video                            0.159511
+phi_1                                         -0.517612
+sigma_1                                       -0.270933
+sigma_2                                       -0.012078
+sigma_3                                       -0.006263
+sigma_4                                       -0.002140
+sigma_5                                       -0.004062
+sigma_6                                       -0.010621
+sigma_7                                        1.000000
+
+Robust correlation matrix:
+                                                     PH                     theta_w
+PH                                              1.00000                    -0.98760
+theta_w                                        -0.98760                     1.00000
+theta_leisure_socialization                    -0.68635                     0.73872
+theta_leisure_hobbies                          -0.31787                     0.34312
+theta_leisure_reading                          -0.36178                     0.39052
+theta_leisure_audio                            -0.56041                     0.60392
+theta_leisure_video                            -0.63309                     0.67863
+phi_1                                           0.97645                    -0.99745
+sigma_1                                         0.71276                    -0.78531
+sigma_2                                         0.13062                    -0.13502
+sigma_3                                         0.01963                    -0.02141
+sigma_4                                         0.02501                    -0.02181
+sigma_5                                         0.02223                    -0.03280
+sigma_6                                         0.07077                    -0.07227
+sigma_7                                        -0.61812                     0.64795
+                            theta_leisure_socialization       theta_leisure_hobbies
+PH                                             -0.68635                    -0.31787
+theta_w                                         0.73872                     0.34312
+theta_leisure_socialization                     1.00000                     0.28224
+theta_leisure_hobbies                           0.28224                     1.00000
+theta_leisure_reading                           0.31806                     0.18878
+theta_leisure_audio                             0.35865                     0.08953
+theta_leisure_video                             0.53736                     0.16177
+phi_1                                          -0.75212                    -0.35021
+sigma_1                                        -0.78172                    -0.35904
+sigma_2                                         0.04960                    -0.04206
+sigma_3                                        -0.07711                     0.72823
+sigma_4                                        -0.04680                     0.04121
+sigma_5                                        -0.17213                    -0.09128
+sigma_6                                        -0.12451                    -0.05029
+sigma_7                                         0.48203                     0.22011
+                                  theta_leisure_reading         theta_leisure_audio
+PH                                            -0.361782                    -0.56041
+theta_w                                        0.390521                     0.60392
+theta_leisure_socialization                    0.318056                     0.35865
+theta_leisure_hobbies                          0.188777                     0.08953
+theta_leisure_reading                          1.000000                     0.17712
+theta_leisure_audio                            0.177125                     1.00000
+theta_leisure_video                            0.288252                     0.31499
+phi_1                                         -0.400416                    -0.61441
+sigma_1                                       -0.402858                    -0.63274
+sigma_2                                       -0.127612                    -0.15658
+sigma_3                                        0.007507                    -0.10518
+sigma_4                                        0.674862                    -0.08679
+sigma_5                                       -0.104593                     0.34377
+sigma_6                                       -0.068473                    -0.12050
+sigma_7                                        0.299258                     0.38847
+                                    theta_leisure_video                       phi_1
+PH                                             -0.63309                     0.97645
+theta_w                                         0.67863                    -0.99745
+theta_leisure_socialization                     0.53736                    -0.75212
+theta_leisure_hobbies                           0.16177                    -0.35021
+theta_leisure_reading                           0.28825                    -0.40042
+theta_leisure_audio                             0.31499                    -0.61441
+theta_leisure_video                             1.00000                    -0.68816
+phi_1                                          -0.68816                     1.00000
+sigma_1                                        -0.69020                     0.80394
+sigma_2                                        -0.17294                     0.13369
+sigma_3                                        -0.10452                     0.02190
+sigma_4                                        -0.03280                     0.01978
+sigma_5                                        -0.14063                     0.03541
+sigma_6                                         0.25945                     0.07355
+sigma_7                                         0.44507                    -0.66978
+                                                sigma_1                     sigma_2
+PH                                              0.71276                     0.13062
+theta_w                                        -0.78531                    -0.13502
+theta_leisure_socialization                    -0.78172                     0.04960
+theta_leisure_hobbies                          -0.35904                    -0.04206
+theta_leisure_reading                          -0.40286                    -0.12761
+theta_leisure_audio                            -0.63274                    -0.15658
+theta_leisure_video                            -0.69020                    -0.17294
+phi_1                                           0.80394                     0.13369
+sigma_1                                         1.00000                     0.20581
+sigma_2                                         0.20581                     1.00000
+sigma_3                                         0.02701                     0.05157
+sigma_4                                         0.01482                 -2.2489e-04
+sigma_5                                         0.11530                     0.07175
+sigma_6                                         0.11435                     0.05608
+sigma_7                                        -0.44265                    -0.03056
+                                                sigma_3                     sigma_4
+PH                                             0.019626                    0.025008
+theta_w                                       -0.021414                   -0.021807
+theta_leisure_socialization                   -0.077114                   -0.046800
+theta_leisure_hobbies                          0.728229                    0.041206
+theta_leisure_reading                          0.007507                    0.674862
+theta_leisure_audio                           -0.105184                   -0.086789
+theta_leisure_video                           -0.104516                   -0.032798
+phi_1                                          0.021899                    0.019782
+sigma_1                                        0.027008                    0.014822
+sigma_2                                        0.051567                 -2.2489e-04
+sigma_3                                        1.000000                    0.063494
+sigma_4                                        0.063494                    1.000000
+sigma_5                                        0.017118                   -0.007239
+sigma_6                                        0.020336                    0.020360
+sigma_7                                       -0.024856                    0.002281
+                                                sigma_5                     sigma_6
+PH                                             0.022234                     0.07077
+theta_w                                       -0.032795                    -0.07227
+theta_leisure_socialization                   -0.172127                    -0.12451
+theta_leisure_hobbies                         -0.091280                    -0.05029
+theta_leisure_reading                         -0.104593                    -0.06847
+theta_leisure_audio                            0.343767                    -0.12050
+theta_leisure_video                           -0.140628                     0.25945
+phi_1                                          0.035408                     0.07355
+sigma_1                                        0.115301                     0.11435
+sigma_2                                        0.071748                     0.05608
+sigma_3                                        0.017118                     0.02034
+sigma_4                                       -0.007239                     0.02036
+sigma_5                                        1.000000                     0.03071
+sigma_6                                        0.030707                     1.00000
+sigma_7                                       -0.027778                    -0.01731
+                                                sigma_7
+PH                                            -0.618115
+theta_w                                        0.647950
+theta_leisure_socialization                    0.482027
+theta_leisure_hobbies                          0.220111
+theta_leisure_reading                          0.299258
+theta_leisure_audio                            0.388473
+theta_leisure_video                            0.445067
+phi_1                                         -0.669779
+sigma_1                                       -0.442645
+sigma_2                                       -0.030559
+sigma_3                                       -0.024856
+sigma_4                                        0.002281
+sigma_5                                       -0.027778
+sigma_6                                       -0.017315
+sigma_7                                        1.000000
+
+ 20 most extreme outliers in terms of lowest average per choice prediction:
+   row Avg prob per choice
+  4802        1.080394e-47
+ 13773        9.178773e-42
+ 30974        3.900998e-36
+  1397        1.865206e-34
+  5028        6.722319e-29
+ 12971        3.161428e-26
+ 29123        1.344473e-23
+ 31225        2.427101e-23
+ 30136        5.796377e-23
+  1629        6.707812e-22
+  5145        1.786774e-21
+ 18881        4.100894e-21
+ 16749        1.067601e-20
+  7426        5.244598e-20
+ 30280        6.056811e-20
+ 33789        1.561572e-19
+ 21332        3.232199e-19
+ 29205        5.672714e-19
+ 22224        8.676914e-19
+ 12158        1.126025e-18
+
+Changes in parameter estimates from starting values:
+                                Initial    Estimate  Difference
+PH                              0.51910     2.23976     1.72066
+theta_w                         0.92522    -5.53410    -6.45932
+theta_leisure_socialization     0.13167     0.28646     0.15479
+theta_leisure_hobbies           0.24500     0.04404    -0.20096
+theta_leisure_reading           0.05407     0.02851    -0.02556
+theta_leisure_audio             0.23637     0.22161    -0.01476
+theta_leisure_video             0.13994     0.19344     0.05350
+phi_1                           0.10929     2.85652     2.74723
+sigma_1                        30.00000    14.40693   -15.59307
+sigma_2                        30.00000     8.02917   -21.97083
+sigma_3                        30.00000     3.46446   -26.53554
+sigma_4                        30.00000     2.13773   -27.86227
+sigma_5                        30.00000     8.85544   -21.14456
+sigma_6                        30.00000     6.90966   -23.09034
+sigma_7                        30.00000    23.47666    -6.52334
+rho_12                          0.00000     0.00000     0.00000
+rho_13                          0.00000     0.00000     0.00000
+rho_14                          0.00000     0.00000     0.00000
+rho_15                          0.00000     0.00000     0.00000
+rho_16                          0.00000     0.00000     0.00000
+rho_17                          0.00000     0.00000     0.00000
+rho_23                          0.00000     0.00000     0.00000
+rho_24                          0.00000     0.00000     0.00000
+rho_25                          0.00000     0.00000     0.00000
+rho_26                          0.00000     0.00000     0.00000
+rho_27                          0.00000     0.00000     0.00000
+rho_34                          0.00000     0.00000     0.00000
+rho_35                          0.00000     0.00000     0.00000
+rho_36                          0.00000     0.00000     0.00000
+rho_37                          0.00000     0.00000     0.00000
+rho_45                          0.00000     0.00000     0.00000
+rho_46                          0.00000     0.00000     0.00000
+rho_47                          0.00000     0.00000     0.00000
+rho_56                          0.00000     0.00000     0.00000
+rho_57                          0.00000     0.00000     0.00000
+rho_67                          0.00000     0.00000     0.00000
+
+Settings and functions used in model definition:
+
+apollo_control
+--------------
+                       Value            
+modelName              "ENUT-THPHNTNE"  
+modelDescr             "Jara-Diaz model"
+indivID                "id_persona"     
+outputDirectory        "output/"        
+analyticGrad           "FALSE"          
+noValidation           "FALSE"          
+noDiagnostics          "TRUE"           
+workInLogs             "FALSE"          
+debug                  "FALSE"          
+nCores                 "1"              
+seed                   "13"             
+mixing                 "FALSE"          
+HB                     "FALSE"          
+calculateLLC           "TRUE"           
+analyticHessian        "FALSE"          
+memorySaver            "FALSE"          
+panelData              "FALSE"          
+analyticGrad_manualSet "TRUE"           
+overridePanel          "FALSE"          
+preventOverridePanel   "FALSE"          
+noModification         "FALSE"          
+
+Hessian routines attempted
+--------------------------
+numerical second derivative of LL (using numDeriv)
+
+
+apollo_probabilities
+----------------------
+function(apollo_beta, apollo_inputs, functionality="estimate"){
+  apollo_attach(apollo_beta, apollo_inputs)
+  on.exit(apollo_detach(apollo_beta, apollo_inputs))
+  P <- list()
+
+  obs_times <- apollo_inputs$database[, times, drop = FALSE]
+  obs_expenditures <- apollo_inputs$database[, expenditures, drop = FALSE]
+
+  est_sigmas <- to_vec(for (i in 1:nequations) get(paste0("sigma_",i)))
+  if (ntimes >= 2)        { est_thetas <- to_vec(for (th in mod_thetas) get(th))} else {est_thetas <- c()}
+  if (nexpenditures >= 1) { est_phis   <- to_vec(for (ph in mod_phis  ) get(ph))} else {est_phis <- c()}
+
+  est_corr <- matrix(1, nequations, nequations)
+  for (i in 1:(nequations)) for (j in i:(nequations)) if (i != j) { est_corr[j,i] <- est_corr[i,j] <- get(paste0("rho_",i,j)) }
+
+  jaradiaz_settings <- list(
+    obs_times        = obs_times, # number of free time allocations
+    obs_expenditures = obs_expenditures, # number of free expednitures
+    nequations       = nequations,
+    ntimes           = ntimes,
+    nexpenditures    = nexpenditures,
+    w                = w,
+    ta               = ta,
+    TH               = 1,
+    PH               = PH,
+    theta_w          = theta_w,
+    thetas           = est_thetas,
+    phis             = est_phis,
+    sigma            = est_sigmas,
+    corr             = est_corr,
+    componentName = "model")
+
+  P[["model"]] <- apollo_jaradiaz(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
+  P <- apollo_prepareProb(P, apollo_inputs, functionality)
+  return(P)
+}

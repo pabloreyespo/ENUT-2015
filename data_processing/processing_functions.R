@@ -30,7 +30,10 @@ acts_corregidas <- c(
     "t_ed",
     "t_vsyo_csar", # convivencia social y actividades recreativas
     "t_vsyo_aa", # arte y aficiones
-    "t_mcm",
+    't_mcm_leer',
+    't_mcm_video',
+    't_mcm_audio',
+    't_mcm_computador',
     "t_tt1" # traslados enut 2015
   )
 
@@ -175,6 +178,7 @@ na_completion <- function(data) {
     mutate_at(c("c14_1_1","m14_1_1","m14_2_1","k42_1_1","k15_1_1",
                 "l15_1_1","l16_1_1","l17_1_1","l117_1_1", "l118_1_1","l119_1_1"),
               ~ifelse(is.na(.), 85, .)) %>%
+    filter(if_all(c('q11_1_2', 'q11_2_2', 'm11_1_2', 'm11_2_2'), ~ !.x  %in% 96)) %>%
     #filter(if_all(n_linea_p:te_ayuda_cercanos, ~ !.x  %in% 96)) %>%
     #filter(l110_1_1 != 1 & l122_1_1 != 1) %>% # en cama enfermos
     #filter(l111_1_1 != 1 & l123_1_1 != 1) %>%# pasaron cosas fuera de lo común
@@ -318,7 +322,11 @@ get_25activities <- function(data) {
   # ocio
   act_t_vsyo_csar <- act_ocio_social <- c("s11", "s21", "s22", "s23") # social y eventos pueden ser mezclables
   act_t_vsyo_aa <- c("s31", "s32", "s41")
-  act_t_mcm <- c("s51", "s52", "s53", "s54")
+
+  act_t_mcm_leer       <- c("s51")
+  act_t_mcm_video      <- c("s52")
+  act_t_mcm_audio      <- c("s53")
+  act_t_mcm_computador <- c("s54")
 
   # cuidados personales
   act_t_cpaf_cp <- c("q12", "q17")
@@ -349,7 +357,10 @@ get_25activities <- function(data) {
       t_ed_ds = dplyr::select(., paste0(act_t_ed, "_1_2")) %>% rowSums(na.rm = T),
       t_vsyo_csar_ds = dplyr::select(., paste0(act_t_vsyo_csar, "_1_2")) %>% rowSums(na.rm = T),
       t_vsyo_aa_ds = dplyr::select(., paste0(act_t_vsyo_aa, "_1_2")) %>% rowSums(na.rm = T),
-      t_mcm_ds = dplyr::select(., paste0(act_t_mcm, "_1_2")) %>% rowSums(na.rm = T),
+      t_mcm_leer_ds = dplyr::select(., paste0(act_t_mcm_leer, "_1_2")) %>% rowSums(na.rm = T),
+      t_mcm_video_ds = dplyr::select(., paste0(act_t_mcm_video, "_1_2")) %>% rowSums(na.rm = T),
+      t_mcm_audio_ds = dplyr::select(., paste0(act_t_mcm_audio, "_1_2")) %>% rowSums(na.rm = T),
+      t_mcm_computador_ds = dplyr::select(., paste0(act_t_mcm_computador, "_1_2")) %>% rowSums(na.rm = T),
       t_cpaf_cp_ds = dplyr::select(., paste0(act_t_cpaf_cp, "_1_2")) %>% rowSums(na.rm = T),
       t_cpag_comer_ds = dplyr::select(., paste0(act_t_cpag_comer, "_1_2")) %>% rowSums(na.rm = T),
       t_cpag_dormir_ds = dplyr::select(., paste0(act_t_cpag_dormir, "_1_2")) %>% rowSums(na.rm = T),
@@ -372,7 +383,10 @@ get_25activities <- function(data) {
       t_ed_fds = dplyr::select(., paste0(act_t_ed, "_2_2")) %>% rowSums(na.rm = T),
       t_vsyo_csar_fds = dplyr::select(., paste0(act_t_vsyo_csar, "_2_2")) %>% rowSums(na.rm = T),
       t_vsyo_aa_fds = dplyr::select(., paste0(act_t_vsyo_aa, "_2_2")) %>% rowSums(na.rm = T),
-      t_mcm_fds = dplyr::select(., paste0(act_t_mcm, "_2_2")) %>% rowSums(na.rm = T),
+      t_mcm_leer_fds = dplyr::select(., paste0(act_t_mcm_leer, "_2_2")) %>% rowSums(na.rm = T),
+      t_mcm_video_fds = dplyr::select(., paste0(act_t_mcm_video, "_2_2")) %>% rowSums(na.rm = T),
+      t_mcm_audio_fds = dplyr::select(., paste0(act_t_mcm_audio, "_2_2")) %>% rowSums(na.rm = T),
+      t_mcm_computador_fds = dplyr::select(., paste0(act_t_mcm_computador, "_2_2")) %>% rowSums(na.rm = T),
       t_cpaf_cp_fds = dplyr::select(., paste0(act_t_cpaf_cp, "_2_2")) %>% rowSums(na.rm = T),
       t_cpag_comer_fds = dplyr::select(., paste0(act_t_cpag_comer, "_2_2")) %>% rowSums(na.rm = T),
       t_cpag_dormir_fds = dplyr::select(., paste0(act_t_cpag_dormir, "_2_2")) %>% rowSums(na.rm = T),
@@ -502,7 +516,7 @@ agregar_actividades <- function(data_post) {
         rowSums(na.rm = TRUE),  # commited/free
       t_unpaid_voluntary = t_tvaoh_tv + t_tvaoh_oh, # free
       t_education = t_ed, # committed / free
-      t_leisure = t_vsyo_csar + t_vsyo_aa + t_mcm, # free
+      t_leisure = t_vsyo_csar + t_vsyo_aa + t_mcm_leer_ds + t_mcm_video + t_mcm_audio + t_mcm_computador, # free
       t_personal_care = t_cpaf_cp, #committed/free
       t_meals         = t_cpag_comer, #committed/free
       t_sleep = t_cpag_dormir, #committed/free
@@ -514,7 +528,7 @@ agregar_actividades <- function(data_post) {
       es_familia = case_when(trabaja == 1 & cae == "Ocupada(o)" & t_to > 0 & vive_pareja == 1 & tiene_hijos ==1  ~ 1, T ~0))
 
 
-  data22 <- data_post %>% dplyr::select(
+  data25 <- data_post %>% dplyr::select(
     all_of(identificadores),
     all_of(tipo_muestra),
     dia_semana, dia_fin_semana,
@@ -527,11 +541,11 @@ agregar_actividades <- function(data_post) {
     all_of(acts_corregidas)) %>%
     mutate(t_total = dplyr::select(., all_of(acts_corregidas)) %>% rowSums(na.rm = TRUE))
 
-  data22[,acts_corregidas]  = round(data22[,acts_corregidas],2)
-  data22[,"temp"] = rowSums(data22[,acts_corregidas])
-  data22[,"t_cpag_dormir"]       = data22[,"t_cpag_dormir"] - (data22[,"temp"] - 168)
-  data22[,"temp"] = rowSums(data22[,acts_corregidas])
-  data22 <- data22 %>% dplyr::select(-c("temp"))
+  data25[,acts_corregidas]  = round(data25[,acts_corregidas],2)
+  data25[,"temp"] = rowSums(data25[,acts_corregidas])
+  data25[,"t_cpag_dormir"]       = data25[,"t_cpag_dormir"] - (data25[,"temp"] - 168)
+  data25[,"temp"] = rowSums(data25[,acts_corregidas])
+  data25 <- data25 %>% dplyr::select(-c("temp"))
 
   data11 <- data_post %>%
     dplyr::select(
@@ -552,7 +566,7 @@ agregar_actividades <- function(data_post) {
   data11[,"t_sleep"]  = data11[,"t_sleep"] - (data11[,"temp"] - 168)
   data11[,"temp"] = rowSums(data11[,t_agregados])
 
-  return(list(data22 = data22, data11= data11))
+  return(list(data25 = data25, data11= data11))
 }
 ###### MANTENER POR AHI ########
 # grupos <- data %>%
