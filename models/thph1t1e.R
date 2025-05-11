@@ -49,7 +49,7 @@ apollo_probabilities <- function(apollo_beta, apollo_inputs, functionality="esti
     sigma       = sigma,
     componentName = "model")
 
-  P[["model"]] <- apollo_jaradiaz_2pi(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
+  P[["model"]] <- apollo_jaradiaz(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
   P <- apollo_prepareProb(P, apollo_inputs, functionality)
   return(P)
 }
