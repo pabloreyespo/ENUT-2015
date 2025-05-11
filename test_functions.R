@@ -1,3 +1,3 @@
 source('utils.R')
 
-get_data_tc()
+model <- apollo_loadModel('output/Tc-sleep-ENUT-THPH1T1E-covariates')

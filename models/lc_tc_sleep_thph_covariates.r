@@ -5,11 +5,12 @@ set.seed(42)
 
 est_set <- list(
   writeIter = FALSE,
-  silent = F,
+  silent = T,
   maxIterations=500,
   scaleHessian = F,
   scaleAfterConvergence = F,
-  estimationRoutine = "bfgs",
+  estimationRoutine = "bgw",
+  hessianRoutine = "maxLik",
   bgw_settings = list(maxFunctionEvals = 1000),
   validateGrad  = FALSE
 )
@@ -18,17 +19,17 @@ est_set <- list(
 ###########                     PRE ESTIMACIÓN                   ##########
 ###########################################################################
 nClass <- 2
-nvals <- 100
+nvals <- 200
 EM <- T
-EMiterMax <- 5
+EMiterMax <- 3
 modelName <- "Tc-sleep-ENUT-THPH1T1E-covariates"
-socioecon   <- c("female", "mayor45", "underage_in_household", "only_worker", "university", "metropolitana")
+socioecon   <- c("female", "mayor45", "underage_in_household", "only_worker", "university", "metropolitana") #
 especificas <- c("asc", paste0("x_",socioecon))
 get_data_tc(especificas = socioecon, disputed = "t_sleep")
-model_data = model_data %>% filter(ec_1> 0, ec_2> 0)
-covariates <- c("female", "mayor45", "underage_in_household", "only_worker")
+model_data = model_data  %>% filter(ec_1> 0, ec_2> 0)
+covariates <- c("female", "mayor45", "only_worker") #
 testvals <- generate_initials_simple_tc_thph(def_sigma = 20, num = nvals, especificas = especificas,
-                                    guess_PH = c(0.7180,0.7180), guess_theta_w = c(-0.1578, -0.1578) , guess_certainty = 0.5,
+                                     guess_PH = c(0.15649, 0.02187), guess_theta_w = c(0.28199, 0.72388) , guess_certainty = 0.01,
                                              covariates = covariates)
 ans <- c(paste0(names(testvals), '_initial'),
          paste0(names(testvals), '_est'),
@@ -63,8 +64,8 @@ apollo_probabilities <- function(apollo_beta, apollo_inputs, functionality="esti
   on.exit(apollo_detach(apollo_beta, apollo_inputs))
   P <- list()
   for (s in 1:length(pi_values)) {
-    PH_value       = PH[[s]]      +female*PH_female[[s]]      +mayor45*PH_mayor45[[s]]       + underage_in_household * PH_underage_in_household[[s]] + only_worker * PH_only_worker[[s]]              #+ university * PH_university[[s]]      #+ metropolitana * PH_metropolitana[[s]]                       #
-    theta_w_value  = theta_w[[s]] +female*theta_w_female[[s]] +mayor45*theta_w_mayor45[[s]]  + underage_in_household * theta_w_underage_in_household[[s]] + only_worker  * theta_w_only_worker[[s]]   #+ university * theta_w_university[[s]] #+ metropolitana * theta_w_metropolitana[[s]] #
+    PH_value       = PH[[s]]      +female*PH_female[[s]]      +mayor45*PH_mayor45[[s]]  + only_worker * PH_only_worker[[s]]              #+ university * PH_university[[s]]      #+ metropolitana * PH_metropolitana[[s]]                       #
+    theta_w_value  = theta_w[[s]] +female*theta_w_female[[s]] +mayor45*theta_w_mayor45[[s]]  + only_worker  * theta_w_only_worker[[s]]   #+ university * theta_w_university[[s]] #+ metropolitana * theta_w_metropolitana[[s]] #
     jaradiaz_settings <- list(Tw          = apollo_inputs$database[, paste0("Tw_",s)],
                               Tc          = apollo_inputs$database[, paste0("Tc_",s)],
                               Ec          = apollo_inputs$database[, paste0("Ec_",s)],
@@ -75,7 +76,7 @@ apollo_probabilities <- function(apollo_beta, apollo_inputs, functionality="esti
                               theta_w     = theta_w_value,
                               sigma       = sigma[[s]],
                               componentName = paste0("class_",s))
-    P[[paste0("class_",s)]] <- apollo_jaradiaz(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
+    P[[paste0("class_",s)]] <- apollo_jaradiaz_2pi(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
   }
   lc_settings <- list(inClassProb = P, classProb=pi_values)
   P[["model"]] <- apollo_lc(lc_settings, apollo_inputs, functionality)
@@ -111,10 +112,21 @@ for (j in 1:nvals) {
   model <- NULL
   suppressWarnings({ try({
       if (EM) { #
-        invisible(capture.output( model <- apollo_lcEM(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs,
-                                     estimate_settings =  list(writeIter = FALSE, silent = T, scaleHessian = F, scaleAfterConvergence = F,validateGrad  = FALSE),
-                                     lcEM_settings = list(EMmaxIterations = EMiterMax, silent =T))))
-        apollo_beta <- model$estimate }
+        invisible(capture.output({
+           model <- apollo_lcEM(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs,
+                               estimate_settings =  list(
+                                 writeIter = FALSE,
+                                 silent = T,
+                                 scaleHessian = F,
+                                 scaleAfterConvergence = F,
+                                 validateGrad  = FALSE),
+                               lcEM_settings = list(
+                                 EMmaxIterations = EMiterMax,
+                                 silent =T,
+                                 postEM = 0))
+        }))
+        apollo_beta <- model$estimate
+      }
     model <- apollo_estimate(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs, estimate_settings= est_set)
     })
   })
@@ -128,8 +140,9 @@ for (j in 1:nvals) {
     if ((model$code==4&est_set$estimationRoutine=="bgw"|model$code==0&est_set$estimationRoutine=="bfgs") & (model$eigValue < 0)& (model$maximum > best_LL)) { #&
       best_LL <- model$maximum
       best_model <- model
+      apollo_saveOutput(best_model)
       tryCatch(apollo_modelOutput(model), error=function(e) NULL)
-      #break
+      break
     }})
 }
 name <- paste0("results/", modelName, ".csv")

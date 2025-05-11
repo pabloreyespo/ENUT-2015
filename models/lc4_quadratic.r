@@ -3,11 +3,12 @@ source("utils.R")
 
 est_set <- list(
   writeIter = FALSE,
-  silent = F,
+  silent = T,
   maxIterations=500,
   scaleHessian = F,
   scaleAfterConvergence = F,
-  estimationRoutine = "bfgs",
+  estimationRoutine = "bgw",
+  hessianRoutine = "maxLik",
   bgw_settings = list(maxFunctionEvals = 1000),
   validateGrad  = FALSE
 )
@@ -17,9 +18,9 @@ set.seed(42)
 ###########                     PRE ESTIMACIÓN                   ##########
 ###########################################################################
 nClass <- 4
-nvals <- 100
+nvals <- 200
 EM <- T
-EMiterMax <- 5
+EMiterMax <- 3
 modelName <- "4C-quadratic"
 socioecon   <- c("female", "mayor45", "underage_in_household", "only_worker", "university", "metropolitana")
 especificas <- c("asc", paste0("x_",socioecon))
@@ -113,9 +114,22 @@ for (j in 1:nvals) {
     silent       = T)
   model <- NULL
   suppressWarnings({ try({
-      if (EM) { invisible(capture.output(     model <- apollo_lcEM(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs,
-                       lcEM_settings = list(EMmaxIterations = EMiterMax, silent =T))))
-    apollo_beta <- model$estimate }
+      if (EM) { #
+        invisible(capture.output({
+           model <- apollo_lcEM(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs,
+                               estimate_settings =  list(
+                                 writeIter = FALSE,
+                                 silent = T,
+                                 scaleHessian = F,
+                                 scaleAfterConvergence = F,
+                                 validateGrad  = FALSE),
+                               lcEM_settings = list(
+                                 EMmaxIterations = EMiterMax,
+                                 silent =T,
+                                 postEM = 0))
+        }))
+        apollo_beta <- model$estimate
+      }
     model <- apollo_estimate(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs, estimate_settings= est_set)
     })
   })
@@ -129,6 +143,7 @@ for (j in 1:nvals) {
     if ((model$code==4&est_set$estimationRoutine=="bgw"|model$code==0&est_set$estimationRoutine=="bfgs") & (model$eigValue < 0)& (model$maximum > best_LL)) { #&
       best_LL <- model$maximum
       best_model <- model
+      apollo_saveOutput(best_model)
       tryCatch(apollo_modelOutput(model), error=function(e) NULL)
       break
     }})
@@ -138,3 +153,20 @@ name <- paste0("results/", modelName, ".csv")
 apollo_saveOutput(best_model)
 write.csv(ans, name)
 
+out <- post_eval_latent_class(modelName, model_data, set_class = T)
+best_model <- out$model
+model_data <- out$data
+apollo_modelOutput(best_model)
+
+cat("probabilistic assign:", "\n")
+cat(colSums(model_data[, paste0("pi_",1:nClass)]) / nrow(model_data), "\n")
+cat("deterministic assign:", "\n")
+cat(model_data[,paste0("pi_",1:nClass)] %>% max.col() %>% table() / nrow(model_data), "\n")
+
+pi <- model_data %>% group_by(class) %>%
+  summarise(pi_1_prom = mean(pi_1),
+            pi_2_prom = mean(pi_2),
+            pi_3_prom = mean(pi_3),
+            pi_4_prom = mean(pi_4))
+
+print(pi)

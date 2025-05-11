@@ -1,6 +1,7 @@
 rm(list = ls())  # .rs.restartR()
 pkgs <- c("ggplot2", "dplyr", "tidyr", "readr", "purrr", "tibble", "stringr", "forcats", "lubridate", "haven", "reshape2","apollo", "comprehenr", "Hmisc")
-est_set <- list(writeIter = FALSE, silent = T, maxIterations=500, scaleHessian = F, scaleAfterConvergence = F, estimationRoutine = "bfgs",
+est_set <- list(writeIter = FALSE, silent = T, maxIterations=500, scaleHessian = F, scaleAfterConvergence = F, estimationRoutine = "bgw",
+hessianRoutine = "maxLik",
                 bgw_settings = list(maxFunctionEvals = 1000), validateGrad  = FALSE)
 invisible(lapply(pkgs, library, character.only=TRUE))
 source('utils.R')

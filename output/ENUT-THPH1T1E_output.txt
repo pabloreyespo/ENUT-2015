@@ -1,0 +1,156 @@
+Model run by pablo using Apollo 0.3.4 on R 4.4.3 for Windows.
+Please acknowledge the use of Apollo by citing Hess & Palma (2019)
+  DOI 10.1016/j.jocm.2019.100170
+  www.ApolloChoiceModelling.com
+
+Model name                                  : ENUT-THPH1T1E
+Model description                           : Modelo Jara-Diaz
+Model run at                                : 2025-04-17 09:50:53.3301
+Estimation method                           : bgw
+Model diagnosis                             : Relative function convergence
+Optimisation diagnosis                      : Maximum found
+     hessian properties                     : Negative definite
+     maximum eigenvalue                     : -58.202267
+     reciprocal of condition number         : 0.0010188
+Number of individuals                       : 4364
+Number of rows in database                  : 4364
+Number of modelled outcomes                 : 0
+
+Number of cores used                        :  1 
+Model without mixing
+
+LL(start)                                   : 0
+LL at equal shares, LL(0)                   : NA
+LL at observed shares, LL(C)                : NA
+LL(final)                                   : -16894.03
+Rho-squared vs equal shares                  :  Not applicable 
+Adj.Rho-squared vs equal shares              :  Not applicable 
+Rho-squared vs observed shares               :  Not applicable 
+Adj.Rho-squared vs observed shares           :  Not applicable 
+AIC                                         :  33794.06 
+BIC                                         :  -Inf 
+
+Estimated parameters                        : 3
+Time taken (hh:mm:ss)                       :  00:00:0.57 
+     pre-estimation                         :  00:00:0.38 
+     estimation                             :  00:00:0.08 
+     post-estimation                        :  00:00:0.1 
+Iterations                                  :  14  
+
+Unconstrained optimisation.
+
+Estimates:
+           Estimate        s.e.   t.rat.(0)    Rob.s.e. Rob.t.rat.(0)
+PH           0.3059     0.01666      18.367     0.02475        12.360
+theta_w      0.1120     0.03482       3.216     0.05380         2.082
+sigma       11.6149     0.13108      88.611     0.20248        57.364
+
+
+Classical covariance matrix:
+                 PH     theta_w       sigma
+PH       2.7746e-04 -5.5736e-04  -1.749e-05
+theta_w -5.5736e-04    0.001213   4.095e-05
+sigma    -1.749e-05   4.095e-05     0.01718
+
+Robust covariance matrix:
+                 PH     theta_w       sigma
+PH       6.1269e-04   -0.001312 -3.4438e-04
+theta_w   -0.001312    0.002894  7.9452e-04
+sigma   -3.4438e-04  7.9452e-04     0.04100
+
+Classical correlation matrix:
+                 PH     theta_w       sigma
+PH         1.000000   -0.960929   -0.008012
+theta_w   -0.960929    1.000000    0.008971
+sigma     -0.008012    0.008971    1.000000
+
+Robust correlation matrix:
+                 PH     theta_w       sigma
+PH          1.00000    -0.98516    -0.06871
+theta_w    -0.98516     1.00000     0.07294
+sigma      -0.06871     0.07294     1.00000
+
+ 20 most extreme outliers in terms of lowest average per choice prediction:
+   row Avg prob per choice
+ 11354        8.017459e-11
+ 12158        1.148236e-08
+ 24447        3.647179e-08
+ 28321        5.540301e-08
+ 29205        9.148137e-08
+ 24134        1.978800e-07
+ 16022        1.349304e-06
+  8597        1.436320e-06
+  7663        1.992115e-06
+ 20006        2.804928e-06
+ 33837        3.049957e-06
+  6731        3.346794e-06
+ 15572        3.527180e-06
+  7117        5.120044e-06
+ 24387        7.645496e-06
+  4962        7.681965e-06
+  3548        7.957295e-06
+  5588        9.238528e-06
+  7664        1.366125e-05
+ 13144        1.726607e-05
+
+Changes in parameter estimates from starting values:
+            Initial    Estimate  Difference
+PH           0.9148      0.3059     -0.6089
+theta_w      0.2525      0.1120     -0.1405
+sigma       10.0000     11.6149      1.6149
+
+Settings and functions used in model definition:
+
+apollo_control
+--------------
+                       Value             
+modelName              "ENUT-THPH1T1E"   
+modelDescr             "Modelo Jara-Diaz"
+indivID                "id_persona"      
+outputDirectory        "output/"         
+noValidation           "TRUE"            
+analyticGrad           "TRUE"            
+noDiagnostics          "TRUE"            
+workInLogs             "FALSE"           
+debug                  "FALSE"           
+nCores                 "1"               
+seed                   "13"              
+mixing                 "FALSE"           
+HB                     "FALSE"           
+calculateLLC           "TRUE"            
+analyticHessian        "FALSE"           
+memorySaver            "FALSE"           
+panelData              "FALSE"           
+analyticGrad_manualSet "TRUE"            
+overridePanel          "FALSE"           
+preventOverridePanel   "FALSE"           
+noModification         "FALSE"           
+
+Hessian routines attempted
+--------------------------
+numerical second derivative of LL (using maxLik)
+
+
+apollo_probabilities
+----------------------
+function(apollo_beta, apollo_inputs, functionality="estimate"){
+  apollo_attach(apollo_beta, apollo_inputs)
+  on.exit(apollo_detach(apollo_beta, apollo_inputs))
+  P <- list()
+
+  jaradiaz_settings <- list(
+    Tw          = apollo_inputs$database[, "Tw"],
+    Tc          = apollo_inputs$database[, "Tc"],
+    Ec          = apollo_inputs$database[, "Ec"],
+    w           = w,
+    ta          = ta,
+    TH          = 1,
+    PH          = PH,
+    theta_w     = theta_w,
+    sigma       = sigma,
+    componentName = "model")
+
+  P[["model"]] <- apollo_jaradiaz_2pi(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
+  P <- apollo_prepareProb(P, apollo_inputs, functionality)
+  return(P)
+}

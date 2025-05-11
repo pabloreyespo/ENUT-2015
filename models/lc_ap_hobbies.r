@@ -5,11 +5,12 @@ set.seed(42)
 
 est_set <- list(
   writeIter = FALSE,
-  silent = F,
+  silent = T,
   maxIterations=500,
   scaleHessian = F,
   scaleAfterConvergence = F,
-  estimationRoutine = "bfgs",
+  estimationRoutine = "bgw",
+  hessianRoutine = "maxLik",
   bgw_settings = list(maxFunctionEvals = 1000),
   validateGrad  = FALSE
 )
@@ -19,9 +20,9 @@ est_set <- list(
 ###########################################################################
 
 nClass <- 2
-nvals <- 100
+nvals <- 200
 EM <- T
-EMiterMax <- 5
+EMiterMax <- 3
 penalization <- 1.5
 modelName <- paste0("lc_ap_hobbies_", penalization)
 socioecon   <- c("female", "mayor45", "underage_in_household", "only_worker", "university", "metropolitana")
@@ -35,7 +36,7 @@ get_data(
     Tf4 = c("t_cpag_comer")),
   free_expenditures = list(Ef1 = c("alimentos","recreacion","restaurantes","comunicaciones","vestimenta")), baskets = T)
 nClass = length(unique(model_data$class))
-model_data = model_data %>% filter(ec> 0, ec< 1)
+model_data = model_data %>% filter(ec> 0)
 corr_mix <- list()
 ntimes <- length(times) - 2
 nexpenditures <- max(0, length(expenditures) - 2)
@@ -144,7 +145,7 @@ apollo_probabilities <- function(apollo_beta, apollo_inputs, functionality="esti
       pen      <- 1
     }
 
-    P[[paste0("class_",s)]]  <- apollo_jaradiaz(jaradiaz_settings = jaradiaz_settings, functionality = functionality) * pen
+    P[[paste0("class_",s)]]  <- apollo_jaradiaz_2pi(jaradiaz_settings = jaradiaz_settings, functionality = functionality) * pen
   }
   lc_settings <- list(inClassProb = P, classProb=pi_values)
   P[["model"]] <- apollo_lc(lc_settings, apollo_inputs, functionality)
@@ -189,10 +190,22 @@ for (j in 1:nvals) {
 
   model <- NULL
   suppressWarnings({ try({
-    if (EM) { invisible(capture.output( model <- apollo_lcEM(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs,
-                                   estimate_settings =  list(writeIter = FALSE, silent = T, scaleHessian = F, scaleAfterConvergence = F,validateGrad  = FALSE),
-                                   lcEM_settings = list(EMmaxIterations = EMiterMax, silent =T))))
-      apollo_beta <- model$estimate }
+      if (EM) { #
+        invisible(capture.output({
+           model <- apollo_lcEM(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs,
+                               estimate_settings =  list(
+                                 writeIter = FALSE,
+                                 silent = T,
+                                 scaleHessian = F,
+                                 scaleAfterConvergence = F,
+                                 validateGrad  = FALSE),
+                               lcEM_settings = list(
+                                 EMmaxIterations = EMiterMax,
+                                 silent =T,
+                                 postEM = 0))
+        }))
+        apollo_beta <- model$estimate
+      }
     model <- apollo_estimate(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs, estimate_settings= est_set)
     })
   })
@@ -203,11 +216,12 @@ for (j in 1:nvals) {
   try(ans[j, 'state']    <-  model$message)
   try(ans[j, 'code']     <-  model$code)
   try({
-    if ((model$code==4&est_set$estimationRoutine=="bgw"|model$code==0&est_set$estimationRoutine=="bfgs") & (model$eigValue <= 0)& (model$maximum > best_LL)) { #&
+    if ((model$code==4&est_set$estimationRoutine=="bgw"|model$code==0&est_set$estimationRoutine=="bfgs") & (model$eigValue < 0)& (model$maximum > best_LL)) { #&
       best_LL <- model$maximum
       best_model <- model
+      apollo_saveOutput(best_model)
       tryCatch(apollo_modelOutput(model), error=function(e) NULL)
-      #break
+      break
     }})
 }
 

@@ -297,7 +297,7 @@ apollo_jaradiaz_2pi <- function(jaradiaz_settings, functionality="estimate"){
   #### OUTPUT #### ---> En base a los datos que entrego me hace un reporte, puedo hacerlo pero aun no es necesario
   # ------------ #
   if(functionality %in% c("output", "report")){
-    ans <- apollo_jaradiaz(jaradiaz_settings, functionality="estimate")
+    ans <- apollo_jaradiaz_2pi(jaradiaz_settings, functionality="estimate")
     return(ans)
   }
 

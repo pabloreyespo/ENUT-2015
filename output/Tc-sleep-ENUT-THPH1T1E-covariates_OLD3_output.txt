@@ -1,0 +1,904 @@
+Model run by preyes using Apollo 0.3.4 on R 4.4.0 for Linux.
+Please acknowledge the use of Apollo by citing Hess & Palma (2019)
+  DOI 10.1016/j.jocm.2019.100170
+  www.ApolloChoiceModelling.com
+
+Model name                                  : Tc-sleep-ENUT-THPH1T1E-covariates
+Model description                           : Jara-Diaz model
+Model run at                                : 2025-04-23 03:10:39.709151
+Estimation method                           : bgw
+Model diagnosis                             : Relative function convergence
+Optimisation diagnosis                      : Maximum found
+     hessian properties                     : Negative definite
+     maximum eigenvalue                     : -5.915798
+     reciprocal of condition number         : 6.93831e-05
+Number of individuals                       : 4364
+Number of rows in database                  : 4364
+Number of modelled outcomes                 : 0
+
+Number of cores used                        :  1 
+Model without mixing
+
+LL(start)                                   : 0
+LL (whole model) at equal shares, LL(0)     : NA
+LL (whole model) at observed shares, LL(C)  : NA
+LL(final, whole model)                      : -16453.5
+Rho-squared vs equal shares                  :  Not applicable 
+Adj.Rho-squared vs equal shares              :  Not applicable 
+Rho-squared vs observed shares               :  Not applicable 
+Adj.Rho-squared vs observed shares           :  Not applicable 
+AIC                                         :  32941 
+BIC                                         :  NA 
+
+LL(0,class_1)                    : Not applicable
+LL(final,class_1)                : -17137.03
+LL(0,class_2)                    : Not applicable
+LL(final,class_2)                : -21883.16
+
+Estimated parameters                        : 17
+Time taken (hh:mm:ss)                       :  00:02:39.13 
+     pre-estimation                         :  00:00:2.76 
+     estimation                             :  00:00:47.63 
+     post-estimation                        :  00:01:48.73 
+Iterations                                  :  24  
+
+Unconstrained optimisation.
+
+Estimates:
+                             Estimate        s.e.   t.rat.(0)    Rob.s.e.
+PH_1                         0.004574     0.01004      0.4556     0.01613
+theta_w_1                    1.096353     0.04774     22.9635     0.07703
+sigma_1                     12.302014     0.25911     47.4788     0.62901
+asc_1                        0.000000          NA          NA          NA
+x_female_1                   0.000000          NA          NA          NA
+x_mayor45_1                  0.000000          NA          NA          NA
+x_underage_in_household_1    0.000000          NA          NA          NA
+x_only_worker_1              0.000000          NA          NA          NA
+x_university_1               0.000000          NA          NA          NA
+x_metropolitana_1            0.000000          NA          NA          NA
+PH_female_1                  0.030824     0.02290      1.3461     0.03673
+theta_w_female_1            -0.198935     0.08626     -2.3061     0.14157
+PH_2                         0.527442     0.04428     11.9128     0.08183
+theta_w_2                   -0.581847     0.08584     -6.7783     0.16317
+sigma_2                      6.659794     0.30394     21.9117     0.61889
+asc_2                        0.417814     0.20639      2.0244     0.30705
+x_female_2                   0.042813     0.18357      0.2332     0.31609
+x_mayor45_2                  0.019044     0.16371      0.1163     0.22469
+x_underage_in_household_2    0.499246     0.20124      2.4808     0.38280
+x_only_worker_2             -2.354480     0.23479    -10.0279     0.36158
+x_university_2              -0.450952     0.26925     -1.6748     0.47356
+x_metropolitana_2           -0.306232     0.16760     -1.8272     0.22702
+PH_female_2                  0.027880     0.05110      0.5456     0.06027
+theta_w_female_2            -0.120204     0.09639     -1.2470     0.10980
+                          Rob.t.rat.(0)
+PH_1                            0.28357
+theta_w_1                      14.23223
+sigma_1                        19.55764
+asc_1                                NA
+x_female_1                           NA
+x_mayor45_1                          NA
+x_underage_in_household_1            NA
+x_only_worker_1                      NA
+x_university_1                       NA
+x_metropolitana_1                    NA
+PH_female_1                     0.83916
+theta_w_female_1               -1.40524
+PH_2                            6.44551
+theta_w_2                      -3.56582
+sigma_2                        10.76088
+asc_2                           1.36075
+x_female_2                      0.13544
+x_mayor45_2                     0.08476
+x_underage_in_household_2       1.30420
+x_only_worker_2                -6.51164
+x_university_2                 -0.95226
+x_metropolitana_2              -1.34893
+PH_female_2                     0.46261
+theta_w_female_2               -1.09474
+
+
+Summary of class allocation for model component :
+         Mean prob.
+class_1      0.5416
+class_2      0.4584
+
+
+Classical covariance matrix:
+                                               PH_1                 theta_w_1
+PH_1                                     1.0079e-04               -4.1730e-04
+theta_w_1                               -4.1730e-04                  0.002279
+sigma_1                                 -5.5745e-04                  0.002285
+PH_female_1                              -6.343e-05                2.4061e-04
+theta_w_female_1                         3.0092e-04                 -0.001628
+PH_2                                     1.8736e-04               -8.7897e-04
+theta_w_2                               -3.4369e-04                  0.001491
+sigma_2                                 -9.9811e-04                  0.002734
+asc_2                                   -8.2220e-04                  0.003985
+x_female_2                               8.3416e-04                 -0.003181
+x_mayor45_2                              -3.998e-05               -6.0236e-04
+x_underage_in_household_2               -2.2034e-04               -5.4324e-04
+x_only_worker_2                         -6.4272e-04                  0.003178
+x_university_2                          -9.4964e-04                  0.004550
+x_metropolitana_2                        1.0842e-04               -9.8060e-04
+PH_female_2                              -8.141e-05                3.7965e-04
+theta_w_female_2                         1.5069e-04               -6.5445e-04
+                                            sigma_1               PH_female_1
+PH_1                                    -5.5745e-04                -6.343e-05
+theta_w_1                                  0.002285                2.4061e-04
+sigma_1                                    0.067136                2.4032e-04
+PH_female_1                              2.4032e-04                5.2437e-04
+theta_w_female_1                          -0.002162                 -0.001784
+PH_2                                      -0.005642                -5.368e-05
+theta_w_2                                  0.011283                1.2399e-04
+sigma_2                                    0.031137                4.1848e-04
+asc_2                                      0.017729                2.1879e-04
+x_female_2                                -0.014785                 -0.001420
+x_mayor45_2                                0.004877                 3.845e-05
+x_underage_in_household_2                  0.010258                6.2376e-04
+x_only_worker_2                           -0.007800               -6.1990e-04
+x_university_2                             0.029635                 8.092e-05
+x_metropolitana_2                          0.001776                2.9653e-04
+PH_female_2                                0.001497                1.6619e-04
+theta_w_female_2                          -0.002952               -2.4406e-04
+                                   theta_w_female_1                      PH_2
+PH_1                                     3.0092e-04                1.8736e-04
+theta_w_1                                 -0.001628               -8.7897e-04
+sigma_1                                   -0.002162                 -0.005642
+PH_female_1                               -0.001784                -5.368e-05
+theta_w_female_1                           0.007441                5.5465e-04
+PH_2                                     5.5465e-04                  0.001960
+theta_w_2                                 -0.001108                 -0.003738
+sigma_2                                   -0.003630                 -0.006316
+asc_2                                     -0.001862                 -0.004287
+x_female_2                                 0.005728                  0.003774
+x_mayor45_2                             -2.4569e-04               -5.3254e-04
+x_underage_in_household_2                 -0.002815                 -0.001463
+x_only_worker_2                            0.002480               -4.5390e-04
+x_university_2                            -0.001739                 -0.005346
+x_metropolitana_2                         -0.001159                4.6783e-04
+PH_female_2                             -8.9679e-04                 -0.001327
+theta_w_female_2                           0.001313                  0.002503
+                                          theta_w_2                   sigma_2
+PH_1                                    -3.4369e-04               -9.9811e-04
+theta_w_1                                  0.001491                  0.002734
+sigma_1                                    0.011283                  0.031137
+PH_female_1                              1.2399e-04                4.1848e-04
+theta_w_female_1                          -0.001108                 -0.003630
+PH_2                                      -0.003738                 -0.006316
+theta_w_2                                  0.007369                  0.014067
+sigma_2                                    0.014067                  0.092378
+asc_2                                      0.008076                  0.026275
+x_female_2                                -0.007603                 -0.022184
+x_mayor45_2                                0.001670                  0.009574
+x_underage_in_household_2                  0.004176                  0.026692
+x_only_worker_2                         -5.0831e-04                 -0.020869
+x_university_2                             0.009747                  0.023116
+x_metropolitana_2                       -1.7771e-04                  0.006756
+PH_female_2                                0.002557                  0.002433
+theta_w_female_2                          -0.004962                 -0.004724
+                                              asc_2                x_female_2
+PH_1                                    -8.2220e-04                8.3416e-04
+theta_w_1                                  0.003985                 -0.003181
+sigma_1                                    0.017729                 -0.014785
+PH_female_1                              2.1879e-04                 -0.001420
+theta_w_female_1                          -0.001862                  0.005728
+PH_2                                      -0.004287                  0.003774
+theta_w_2                                  0.008076                 -0.007603
+sigma_2                                    0.026275                 -0.022184
+asc_2                                      0.042597                 -0.017227
+x_female_2                                -0.017227                  0.033699
+x_mayor45_2                               -0.011643                 -0.004864
+x_underage_in_household_2                 -0.013226                 -0.011863
+x_only_worker_2                           -0.009284                 -0.001961
+x_university_2                             0.010112                 -0.017149
+x_metropolitana_2                         -0.010593                 -0.001025
+PH_female_2                                0.001219                 -0.003139
+theta_w_female_2                          -0.002394                  0.005974
+                                        x_mayor45_2 x_underage_in_household_2
+PH_1                                     -3.998e-05               -2.2034e-04
+theta_w_1                               -6.0236e-04               -5.4324e-04
+sigma_1                                    0.004877                  0.010258
+PH_female_1                               3.845e-05                6.2376e-04
+theta_w_female_1                        -2.4569e-04                 -0.002815
+PH_2                                    -5.3254e-04                 -0.001463
+theta_w_2                                  0.001670                  0.004176
+sigma_2                                    0.009574                  0.026692
+asc_2                                     -0.011643                 -0.013226
+x_female_2                                -0.004864                 -0.011863
+x_mayor45_2                                0.026799                  0.013248
+x_underage_in_household_2                  0.013248                  0.040498
+x_only_worker_2                           -0.002884                 -0.003510
+x_university_2                             0.003866                  0.006095
+x_metropolitana_2                          0.002623                  0.007028
+PH_female_2                              7.4267e-04                  0.001930
+theta_w_female_2                          -0.001541                 -0.003617
+                                    x_only_worker_2            x_university_2
+PH_1                                    -6.4272e-04               -9.4964e-04
+theta_w_1                                  0.003178                  0.004550
+sigma_1                                   -0.007800                  0.029635
+PH_female_1                             -6.1990e-04                 8.092e-05
+theta_w_female_1                           0.002480                 -0.001739
+PH_2                                    -4.5390e-04                 -0.005346
+theta_w_2                               -5.0831e-04                  0.009747
+sigma_2                                   -0.020869                  0.023116
+asc_2                                     -0.009284                  0.010112
+x_female_2                                -0.001961                 -0.017149
+x_mayor45_2                               -0.002884                  0.003866
+x_underage_in_household_2                 -0.003510                  0.006095
+x_only_worker_2                            0.055128                  0.008166
+x_university_2                             0.008166                  0.072496
+x_metropolitana_2                         -0.003126                 -0.002988
+PH_female_2                               3.921e-05                7.4444e-04
+theta_w_female_2                        -2.7300e-04                 -0.001569
+                                  x_metropolitana_2               PH_female_2
+PH_1                                     1.0842e-04                -8.141e-05
+theta_w_1                               -9.8060e-04                3.7965e-04
+sigma_1                                    0.001776                  0.001497
+PH_female_1                              2.9653e-04                1.6619e-04
+theta_w_female_1                          -0.001159               -8.9679e-04
+PH_2                                     4.6783e-04                 -0.001327
+theta_w_2                               -1.7771e-04                  0.002557
+sigma_2                                    0.006756                  0.002433
+asc_2                                     -0.010593                  0.001219
+x_female_2                                -0.001025                 -0.003139
+x_mayor45_2                                0.002623                7.4267e-04
+x_underage_in_household_2                  0.007028                  0.001930
+x_only_worker_2                           -0.003126                 3.921e-05
+x_university_2                            -0.002988                7.4444e-04
+x_metropolitana_2                          0.028089                4.6783e-04
+PH_female_2                              4.6783e-04                  0.002611
+theta_w_female_2                        -8.3169e-04                 -0.004831
+                                   theta_w_female_2
+PH_1                                     1.5069e-04
+theta_w_1                               -6.5445e-04
+sigma_1                                   -0.002952
+PH_female_1                             -2.4406e-04
+theta_w_female_1                           0.001313
+PH_2                                       0.002503
+theta_w_2                                 -0.004962
+sigma_2                                   -0.004724
+asc_2                                     -0.002394
+x_female_2                                 0.005974
+x_mayor45_2                               -0.001541
+x_underage_in_household_2                 -0.003617
+x_only_worker_2                         -2.7300e-04
+x_university_2                            -0.001569
+x_metropolitana_2                       -8.3169e-04
+PH_female_2                               -0.004831
+theta_w_female_2                           0.009291
+
+Robust covariance matrix:
+                                               PH_1                 theta_w_1
+PH_1                                     2.6014e-04                 -0.001151
+theta_w_1                                 -0.001151                  0.005934
+sigma_1                                   -0.004856                  0.018610
+PH_female_1                             -1.3585e-04                3.5839e-04
+theta_w_female_1                         7.9123e-04                 -0.002820
+PH_2                                     9.1319e-04                 -0.003826
+theta_w_2                                 -0.001716                  0.006601
+sigma_2                                   -0.004637                  0.010645
+asc_2                                     -0.003292                  0.015639
+x_female_2                                 0.003427                 -0.011968
+x_mayor45_2                             -4.5625e-04                 -0.001959
+x_underage_in_household_2                 -0.001319                 -0.002269
+x_only_worker_2                           -0.001337                  0.010708
+x_university_2                            -0.005221                  0.024084
+x_metropolitana_2                        4.1334e-04                 -0.005308
+PH_female_2                             -3.3114e-04                9.9263e-04
+theta_w_female_2                         6.2464e-04                 -0.001854
+                                            sigma_1               PH_female_1
+PH_1                                      -0.004856               -1.3585e-04
+theta_w_1                                  0.018610                3.5839e-04
+sigma_1                                    0.395658                  0.009477
+PH_female_1                                0.009477                  0.001349
+theta_w_female_1                          -0.043635                 -0.005010
+PH_2                                      -0.040974               -8.2349e-04
+theta_w_2                                  0.083948                  0.001908
+sigma_2                                    0.269647                  0.008360
+asc_2                                      0.123142                  0.001665
+x_female_2                                -0.145831                 -0.005671
+x_mayor45_2                                0.049283                  0.002022
+x_underage_in_household_2                  0.111103                  0.005685
+x_only_worker_2                           -0.077216                 -0.005099
+x_university_2                             0.224995                  0.003233
+x_metropolitana_2                          0.029796                  0.002701
+PH_female_2                                0.016199                8.1734e-04
+theta_w_female_2                          -0.030535                 -0.001328
+                                   theta_w_female_1                      PH_2
+PH_1                                     7.9123e-04                9.1319e-04
+theta_w_1                                 -0.002820                 -0.003826
+sigma_1                                   -0.043635                 -0.040974
+PH_female_1                               -0.005010               -8.2349e-04
+theta_w_female_1                           0.020041                  0.004457
+PH_2                                       0.004457                  0.006696
+theta_w_2                                 -0.009869                 -0.013155
+sigma_2                                   -0.040806                 -0.033920
+asc_2                                     -0.010622                 -0.018337
+x_female_2                                 0.025119                  0.020484
+x_mayor45_2                               -0.008723                 -0.005520
+x_underage_in_household_2                 -0.024618                 -0.012367
+x_only_worker_2                            0.020184                  0.002457
+x_university_2                            -0.019382                 -0.031996
+x_metropolitana_2                         -0.010612               -4.3849e-04
+PH_female_2                               -0.003714                 -0.003249
+theta_w_female_2                           0.006127                  0.006142
+                                          theta_w_2                   sigma_2
+PH_1                                      -0.001716                 -0.004637
+theta_w_1                                  0.006601                  0.010645
+sigma_1                                    0.083948                  0.269647
+PH_female_1                                0.001908                  0.008360
+theta_w_female_1                          -0.009869                 -0.040806
+PH_2                                      -0.013155                 -0.033920
+theta_w_2                                  0.026626                  0.077132
+sigma_2                                    0.077132                  0.383024
+asc_2                                      0.034638                  0.096410
+x_female_2                                -0.042488                 -0.151455
+x_mayor45_2                                0.014534                  0.079359
+x_underage_in_household_2                  0.032151                  0.182578
+x_only_worker_2                           -0.012033                 -0.120814
+x_university_2                             0.060743                  0.153142
+x_metropolitana_2                          0.005097                  0.064572
+PH_female_2                                0.006755                  0.018999
+theta_w_female_2                          -0.012881                 -0.035581
+                                              asc_2                x_female_2
+PH_1                                      -0.003292                  0.003427
+theta_w_1                                  0.015639                 -0.011968
+sigma_1                                    0.123142                 -0.145831
+PH_female_1                                0.001665                 -0.005671
+theta_w_female_1                          -0.010622                  0.025119
+PH_2                                      -0.018337                  0.020484
+theta_w_2                                  0.034638                 -0.042488
+sigma_2                                    0.096410                 -0.151455
+asc_2                                      0.094277                 -0.061582
+x_female_2                                -0.061582                  0.099915
+x_mayor45_2                               -0.007279                 -0.032499
+x_underage_in_household_2                 -0.001301                 -0.075698
+x_only_worker_2                           -0.011481                  0.021169
+x_university_2                             0.098295                 -0.104390
+x_metropolitana_2                         -0.015844                 -0.017497
+PH_female_2                                0.004976                 -0.010983
+theta_w_female_2                          -0.009544                  0.020269
+                                        x_mayor45_2 x_underage_in_household_2
+PH_1                                    -4.5625e-04                 -0.001319
+theta_w_1                                 -0.001959                 -0.002269
+sigma_1                                    0.049283                  0.111103
+PH_female_1                                0.002022                  0.005685
+theta_w_female_1                          -0.008723                 -0.024618
+PH_2                                      -0.005520                 -0.012367
+theta_w_2                                  0.014534                  0.032151
+sigma_2                                    0.079359                  0.182578
+asc_2                                     -0.007279                 -0.001301
+x_female_2                                -0.032499                 -0.075698
+x_mayor45_2                                0.050485                  0.062932
+x_underage_in_household_2                  0.062932                  0.146536
+x_only_worker_2                           -0.029445                 -0.062452
+x_university_2                             0.018189                  0.041505
+x_metropolitana_2                          0.021085                  0.051282
+PH_female_2                                0.005253                  0.011895
+theta_w_female_2                          -0.010054                 -0.021972
+                                    x_only_worker_2            x_university_2
+PH_1                                      -0.001337                 -0.005221
+theta_w_1                                  0.010708                  0.024084
+sigma_1                                   -0.077216                  0.224995
+PH_female_1                               -0.005099                  0.003233
+theta_w_female_1                           0.020184                 -0.019382
+PH_2                                       0.002457                 -0.031996
+theta_w_2                                 -0.012033                  0.060743
+sigma_2                                   -0.120814                  0.153142
+asc_2                                     -0.011481                  0.098295
+x_female_2                                 0.021169                 -0.104390
+x_mayor45_2                               -0.029445                  0.018189
+x_underage_in_household_2                 -0.062452                  0.041505
+x_only_worker_2                            0.130740                  0.010989
+x_university_2                             0.010989                  0.224258
+x_metropolitana_2                         -0.040818                 -0.008063
+PH_female_2                               -0.005037                  0.008737
+theta_w_female_2                           0.008669                 -0.017089
+                                  x_metropolitana_2               PH_female_2
+PH_1                                     4.1334e-04               -3.3114e-04
+theta_w_1                                 -0.005308                9.9263e-04
+sigma_1                                    0.029796                  0.016199
+PH_female_1                                0.002701                8.1734e-04
+theta_w_female_1                          -0.010612                 -0.003714
+PH_2                                    -4.3849e-04                 -0.003249
+theta_w_2                                  0.005097                  0.006755
+sigma_2                                    0.064572                  0.018999
+asc_2                                     -0.015844                  0.004976
+x_female_2                                -0.017497                 -0.010983
+x_mayor45_2                                0.021085                  0.005253
+x_underage_in_household_2                  0.051282                  0.011895
+x_only_worker_2                           -0.040818                 -0.005037
+x_university_2                            -0.008063                  0.008737
+x_metropolitana_2                          0.051537                  0.003474
+PH_female_2                                0.003474                  0.003632
+theta_w_female_2                          -0.006123                 -0.006522
+                                   theta_w_female_2
+PH_1                                     6.2464e-04
+theta_w_1                                 -0.001854
+sigma_1                                   -0.030535
+PH_female_1                               -0.001328
+theta_w_female_1                           0.006127
+PH_2                                       0.006142
+theta_w_2                                 -0.012881
+sigma_2                                   -0.035581
+asc_2                                     -0.009544
+x_female_2                                 0.020269
+x_mayor45_2                               -0.010054
+x_underage_in_household_2                 -0.021972
+x_only_worker_2                            0.008669
+x_university_2                            -0.017089
+x_metropolitana_2                         -0.006123
+PH_female_2                               -0.006522
+theta_w_female_2                           0.012056
+
+Classical correlation matrix:
+                                               PH_1                 theta_w_1
+PH_1                                        1.00000                  -0.87062
+theta_w_1                                  -0.87062                   1.00000
+sigma_1                                    -0.21430                   0.18469
+PH_female_1                                -0.27590                   0.22008
+theta_w_female_1                            0.34748                  -0.39540
+PH_2                                        0.42151                  -0.41582
+theta_w_2                                  -0.39882                   0.36379
+sigma_2                                    -0.32710                   0.18842
+asc_2                                      -0.39681                   0.40441
+x_female_2                                  0.45262                  -0.36298
+x_mayor45_2                                -0.02433                  -0.07707
+x_underage_in_household_2                  -0.10906                  -0.05654
+x_only_worker_2                            -0.27267                   0.28349
+x_university_2                             -0.35132                   0.35396
+x_metropolitana_2                           0.06444                  -0.12255
+PH_female_2                                -0.15870                   0.15562
+theta_w_female_2                            0.15572                  -0.14221
+                                            sigma_1               PH_female_1
+PH_1                                       -0.21430                  -0.27590
+theta_w_1                                   0.18469                   0.22008
+sigma_1                                     1.00000                   0.04050
+PH_female_1                                 0.04050                   1.00000
+theta_w_female_1                           -0.09675                  -0.90305
+PH_2                                       -0.49178                  -0.05295
+theta_w_2                                   0.50729                   0.06308
+sigma_2                                     0.39538                   0.06013
+asc_2                                       0.33153                   0.04629
+x_female_2                                 -0.31084                  -0.33770
+x_mayor45_2                                 0.11498                   0.01026
+x_underage_in_household_2                   0.19674                   0.13536
+x_only_worker_2                            -0.12821                  -0.11530
+x_university_2                              0.42479                   0.01312
+x_metropolitana_2                           0.04091                   0.07727
+PH_female_2                                 0.11307                   0.14204
+theta_w_female_2                           -0.11818                  -0.11057
+                                   theta_w_female_1                      PH_2
+PH_1                                        0.34748                   0.42151
+theta_w_1                                  -0.39540                  -0.41582
+sigma_1                                    -0.09675                  -0.49178
+PH_female_1                                -0.90305                  -0.05295
+theta_w_female_1                            1.00000                   0.14522
+PH_2                                        0.14522                   1.00000
+theta_w_2                                  -0.14967                  -0.98361
+sigma_2                                    -0.13845                  -0.46934
+asc_2                                      -0.10460                  -0.46918
+x_female_2                                  0.36170                   0.46435
+x_mayor45_2                                -0.01740                  -0.07347
+x_underage_in_household_2                  -0.16218                  -0.16424
+x_only_worker_2                             0.12245                  -0.04366
+x_university_2                             -0.07488                  -0.44847
+x_metropolitana_2                          -0.08015                   0.06305
+PH_female_2                                -0.20346                  -0.58663
+theta_w_female_2                            0.15791                   0.58652
+                                          theta_w_2                   sigma_2
+PH_1                                       -0.39882                  -0.32710
+theta_w_1                                   0.36379                   0.18842
+sigma_1                                     0.50729                   0.39538
+PH_female_1                                 0.06308                   0.06013
+theta_w_female_1                           -0.14967                  -0.13845
+PH_2                                       -0.98361                  -0.46934
+theta_w_2                                   1.00000                   0.53916
+sigma_2                                     0.53916                   1.00000
+asc_2                                       0.45585                   0.41885
+x_female_2                                 -0.48248                  -0.39761
+x_mayor45_2                                 0.11886                   0.19243
+x_underage_in_household_2                   0.24175                   0.43640
+x_only_worker_2                            -0.02522                  -0.29244
+x_university_2                              0.42173                   0.28247
+x_metropolitana_2                          -0.01235                   0.13262
+PH_female_2                                 0.58297                   0.15666
+theta_w_female_2                           -0.59966                  -0.16125
+                                              asc_2                x_female_2
+PH_1                                       -0.39681                   0.45262
+theta_w_1                                   0.40441                  -0.36298
+sigma_1                                     0.33153                  -0.31084
+PH_female_1                                 0.04629                  -0.33770
+theta_w_female_1                           -0.10460                   0.36170
+PH_2                                       -0.46918                   0.46435
+theta_w_2                                   0.45585                  -0.48248
+sigma_2                                     0.41885                  -0.39761
+asc_2                                       1.00000                  -0.45468
+x_female_2                                 -0.45468                   1.00000
+x_mayor45_2                                -0.34459                  -0.16187
+x_underage_in_household_2                  -0.31845                  -0.32112
+x_only_worker_2                            -0.19158                  -0.04550
+x_university_2                              0.18196                  -0.34696
+x_metropolitana_2                          -0.30622                  -0.03332
+PH_female_2                                 0.11554                  -0.33469
+theta_w_female_2                           -0.12034                   0.33762
+                                        x_mayor45_2 x_underage_in_household_2
+PH_1                                       -0.02433                  -0.10906
+theta_w_1                                  -0.07707                  -0.05654
+sigma_1                                     0.11498                   0.19674
+PH_female_1                                 0.01026                   0.13536
+theta_w_female_1                           -0.01740                  -0.16218
+PH_2                                       -0.07347                  -0.16424
+theta_w_2                                   0.11886                   0.24175
+sigma_2                                     0.19243                   0.43640
+asc_2                                      -0.34459                  -0.31845
+x_female_2                                 -0.16187                  -0.32112
+x_mayor45_2                                 1.00000                   0.40213
+x_underage_in_household_2                   0.40213                   1.00000
+x_only_worker_2                            -0.07505                  -0.07428
+x_university_2                              0.08770                   0.11249
+x_metropolitana_2                           0.09559                   0.20839
+PH_female_2                                 0.08878                   0.18767
+theta_w_female_2                           -0.09763                  -0.18647
+                                    x_only_worker_2            x_university_2
+PH_1                                      -0.272668                  -0.35132
+theta_w_1                                  0.283492                   0.35396
+sigma_1                                   -0.128212                   0.42479
+PH_female_1                               -0.115297                   0.01312
+theta_w_female_1                           0.122451                  -0.07488
+PH_2                                      -0.043663                  -0.44847
+theta_w_2                                 -0.025221                   0.42173
+sigma_2                                   -0.292438                   0.28247
+asc_2                                     -0.191582                   0.18196
+x_female_2                                -0.045503                  -0.34696
+x_mayor45_2                               -0.075045                   0.08770
+x_underage_in_household_2                 -0.074278                   0.11249
+x_only_worker_2                            1.000000                   0.12917
+x_university_2                             0.129165                   1.00000
+x_metropolitana_2                         -0.079442                  -0.06622
+PH_female_2                                0.003268                   0.05411
+theta_w_female_2                          -0.012063                  -0.06044
+                                  x_metropolitana_2               PH_female_2
+PH_1                                        0.06444                 -0.158702
+theta_w_1                                  -0.12255                  0.155625
+sigma_1                                     0.04091                  0.113072
+PH_female_1                                 0.07727                  0.142036
+theta_w_female_1                           -0.08015                 -0.203456
+PH_2                                        0.06305                 -0.586631
+theta_w_2                                  -0.01235                  0.582975
+sigma_2                                     0.13262                  0.156660
+asc_2                                      -0.30622                  0.115542
+x_female_2                                 -0.03332                 -0.334688
+x_mayor45_2                                 0.09559                  0.088784
+x_underage_in_household_2                   0.20839                  0.187667
+x_only_worker_2                            -0.07944                  0.003268
+x_university_2                             -0.06622                  0.054110
+x_metropolitana_2                           1.00000                  0.054629
+PH_female_2                                 0.05463                  1.000000
+theta_w_female_2                           -0.05148                 -0.980860
+                                   theta_w_female_2
+PH_1                                        0.15572
+theta_w_1                                  -0.14221
+sigma_1                                    -0.11818
+PH_female_1                                -0.11057
+theta_w_female_1                            0.15791
+PH_2                                        0.58652
+theta_w_2                                  -0.59966
+sigma_2                                    -0.16125
+asc_2                                      -0.12034
+x_female_2                                  0.33762
+x_mayor45_2                                -0.09763
+x_underage_in_household_2                  -0.18647
+x_only_worker_2                            -0.01206
+x_university_2                             -0.06044
+x_metropolitana_2                          -0.05148
+PH_female_2                                -0.98086
+theta_w_female_2                            1.00000
+
+Robust correlation matrix:
+                                               PH_1                 theta_w_1
+PH_1                                         1.0000                  -0.92661
+theta_w_1                                   -0.9266                   1.00000
+sigma_1                                     -0.4787                   0.38408
+PH_female_1                                 -0.2293                   0.12666
+theta_w_female_1                             0.3465                  -0.25861
+PH_2                                         0.6919                  -0.60701
+theta_w_2                                   -0.6522                   0.52519
+sigma_2                                     -0.4645                   0.22328
+asc_2                                       -0.6648                   0.66119
+x_female_2                                   0.6722                  -0.49150
+x_mayor45_2                                 -0.1259                  -0.11321
+x_underage_in_household_2                   -0.2136                  -0.07693
+x_only_worker_2                             -0.2293                   0.38444
+x_university_2                              -0.6835                   0.66020
+x_metropolitana_2                            0.1129                  -0.30354
+PH_female_2                                 -0.3407                   0.21381
+theta_w_female_2                             0.3527                  -0.21917
+                                            sigma_1               PH_female_1
+PH_1                                        -0.4787                   -0.2293
+theta_w_1                                    0.3841                    0.1267
+sigma_1                                      1.0000                    0.4102
+PH_female_1                                  0.4102                    1.0000
+theta_w_female_1                            -0.4900                   -0.9634
+PH_2                                        -0.7960                   -0.2740
+theta_w_2                                    0.8179                    0.3183
+sigma_2                                      0.6927                    0.3677
+asc_2                                        0.6376                    0.1476
+x_female_2                                  -0.7335                   -0.4884
+x_mayor45_2                                  0.3487                    0.2450
+x_underage_in_household_2                    0.4614                    0.4043
+x_only_worker_2                             -0.3395                   -0.3839
+x_university_2                               0.7553                    0.1858
+x_metropolitana_2                            0.2087                    0.3240
+PH_female_2                                  0.4273                    0.3692
+theta_w_female_2                            -0.4421                   -0.3292
+                                   theta_w_female_1                      PH_2
+PH_1                                         0.3465                   0.69190
+theta_w_1                                   -0.2586                  -0.60701
+sigma_1                                     -0.4900                  -0.79603
+PH_female_1                                 -0.9634                  -0.27396
+theta_w_female_1                             1.0000                   0.38475
+PH_2                                         0.3848                   1.00000
+theta_w_2                                   -0.4272                  -0.98521
+sigma_2                                     -0.4657                  -0.66978
+asc_2                                       -0.2444                  -0.72979
+x_female_2                                   0.5613                   0.79193
+x_mayor45_2                                 -0.2742                  -0.30024
+x_underage_in_household_2                   -0.4543                  -0.39478
+x_only_worker_2                              0.3943                   0.08305
+x_university_2                              -0.2891                  -0.82566
+x_metropolitana_2                           -0.3302                  -0.02360
+PH_female_2                                 -0.4353                  -0.65876
+theta_w_female_2                             0.3941                   0.68363
+                                          theta_w_2                   sigma_2
+PH_1                                        -0.6522                   -0.4645
+theta_w_1                                    0.5252                    0.2233
+sigma_1                                      0.8179                    0.6927
+PH_female_1                                  0.3183                    0.3677
+theta_w_female_1                            -0.4272                   -0.4657
+PH_2                                        -0.9852                   -0.6698
+theta_w_2                                    1.0000                    0.7638
+sigma_2                                      0.7638                    1.0000
+asc_2                                        0.6913                    0.5073
+x_female_2                                  -0.8238                   -0.7742
+x_mayor45_2                                  0.3964                    0.5707
+x_underage_in_household_2                    0.5147                    0.7707
+x_only_worker_2                             -0.2040                   -0.5399
+x_university_2                               0.7861                    0.5225
+x_metropolitana_2                            0.1376                    0.4596
+PH_female_2                                  0.6869                    0.5094
+theta_w_female_2                            -0.7189                   -0.5236
+                                              asc_2                x_female_2
+PH_1                                       -0.66482                    0.6722
+theta_w_1                                   0.66119                   -0.4915
+sigma_1                                     0.63759                   -0.7335
+PH_female_1                                 0.14760                   -0.4884
+theta_w_female_1                           -0.24436                    0.5613
+PH_2                                       -0.72979                    0.7919
+theta_w_2                                   0.69135                   -0.8238
+sigma_2                                     0.50735                   -0.7742
+asc_2                                       1.00000                   -0.6345
+x_female_2                                 -0.63451                    1.0000
+x_mayor45_2                                -0.10550                   -0.4576
+x_underage_in_household_2                  -0.01107                   -0.6256
+x_only_worker_2                            -0.10341                    0.1852
+x_university_2                              0.67601                   -0.6974
+x_metropolitana_2                          -0.22730                   -0.2438
+PH_female_2                                 0.26892                   -0.5765
+theta_w_female_2                           -0.28310                    0.5840
+                                        x_mayor45_2 x_underage_in_household_2
+PH_1                                        -0.1259                  -0.21362
+theta_w_1                                   -0.1132                  -0.07693
+sigma_1                                      0.3487                   0.46142
+PH_female_1                                  0.2450                   0.40433
+theta_w_female_1                            -0.2742                  -0.45428
+PH_2                                        -0.3002                  -0.39478
+theta_w_2                                    0.3964                   0.51473
+sigma_2                                      0.5707                   0.77066
+asc_2                                       -0.1055                  -0.01107
+x_female_2                                  -0.4576                  -0.62560
+x_mayor45_2                                  1.0000                   0.73168
+x_underage_in_household_2                    0.7317                   1.00000
+x_only_worker_2                             -0.3624                  -0.45120
+x_university_2                               0.1709                   0.22896
+x_metropolitana_2                            0.4134                   0.59011
+PH_female_2                                  0.3879                   0.51562
+theta_w_female_2                            -0.4075                  -0.52274
+                                    x_only_worker_2            x_university_2
+PH_1                                       -0.22926                  -0.68352
+theta_w_1                                   0.38444                   0.66020
+sigma_1                                    -0.33950                   0.75534
+PH_female_1                                -0.38391                   0.18584
+theta_w_female_1                            0.39432                  -0.28912
+PH_2                                        0.08305                  -0.82566
+theta_w_2                                  -0.20395                   0.78609
+sigma_2                                    -0.53988                   0.52253
+asc_2                                      -0.10341                   0.67601
+x_female_2                                  0.18522                  -0.69738
+x_mayor45_2                                -0.36243                   0.17094
+x_underage_in_household_2                  -0.45120                   0.22896
+x_only_worker_2                             1.00000                   0.06418
+x_university_2                              0.06418                   1.00000
+x_metropolitana_2                          -0.49726                  -0.07500
+PH_female_2                                -0.23117                   0.30615
+theta_w_female_2                            0.21835                  -0.32865
+                                  x_metropolitana_2               PH_female_2
+PH_1                                        0.11289                   -0.3407
+theta_w_1                                  -0.30354                    0.2138
+sigma_1                                     0.20866                    0.4273
+PH_female_1                                 0.32395                    0.3692
+theta_w_female_1                           -0.33020                   -0.4353
+PH_2                                       -0.02360                   -0.6588
+theta_w_2                                   0.13759                    0.6869
+sigma_2                                     0.45959                    0.5094
+asc_2                                      -0.22730                    0.2689
+x_female_2                                 -0.24383                   -0.5765
+x_mayor45_2                                 0.41336                    0.3879
+x_underage_in_household_2                   0.59011                    0.5156
+x_only_worker_2                            -0.49726                   -0.2312
+x_university_2                             -0.07500                    0.3061
+x_metropolitana_2                           1.00000                    0.2539
+PH_female_2                                 0.25390                    1.0000
+theta_w_female_2                           -0.24565                   -0.9855
+                                   theta_w_female_2
+PH_1                                         0.3527
+theta_w_1                                   -0.2192
+sigma_1                                     -0.4421
+PH_female_1                                 -0.3292
+theta_w_female_1                             0.3941
+PH_2                                         0.6836
+theta_w_2                                   -0.7189
+sigma_2                                     -0.5236
+asc_2                                       -0.2831
+x_female_2                                   0.5840
+x_mayor45_2                                 -0.4075
+x_underage_in_household_2                   -0.5227
+x_only_worker_2                              0.2184
+x_university_2                              -0.3287
+x_metropolitana_2                           -0.2457
+PH_female_2                                 -0.9855
+theta_w_female_2                             1.0000
+
+ 20 most extreme outliers in terms of lowest average per choice prediction:
+   row Avg prob per choice
+ 11354        2.173589e-12
+ 24447        1.757684e-08
+ 28321        5.425483e-08
+ 29205        1.748540e-07
+  7663        1.133222e-06
+ 24134        2.852955e-06
+  3548        2.982453e-06
+ 15572        3.257645e-06
+ 16022        3.997405e-06
+ 30803        4.208390e-06
+ 23814        8.278051e-06
+ 20006        9.115403e-06
+  5588        1.220172e-05
+  8597        1.225961e-05
+ 12158        1.311645e-05
+  7117        2.427371e-05
+ 13144        2.447949e-05
+ 24387        4.453593e-05
+  6731        4.883109e-05
+  4962        4.983246e-05
+
+Changes in parameter estimates from starting values:
+                              Initial    Estimate  Difference
+PH_1                          0.22383    0.004574   -0.219252
+theta_w_1                     0.41281    1.096353    0.683542
+sigma_1                      11.57962   12.302014    0.722391
+asc_1                         0.00000    0.000000    0.000000
+x_female_1                    0.00000    0.000000    0.000000
+x_mayor45_1                   0.00000    0.000000    0.000000
+x_underage_in_household_1     0.00000    0.000000    0.000000
+x_only_worker_1               0.00000    0.000000    0.000000
+x_university_1                0.00000    0.000000    0.000000
+x_metropolitana_1             0.00000    0.000000    0.000000
+PH_female_1                   0.08123    0.030824   -0.050408
+theta_w_female_1             -0.35396   -0.198935    0.155028
+PH_2                          0.98778    0.527442   -0.460337
+theta_w_2                    -0.58731   -0.581847    0.005465
+sigma_2                       8.82815    6.659794   -2.168356
+asc_2                        -0.98024    0.417814    1.398055
+x_female_2                    0.83749    0.042813   -0.794677
+x_mayor45_2                   0.01626    0.019044    0.002788
+x_underage_in_household_2     0.06854    0.499246    0.430702
+x_only_worker_2              -0.68763   -2.354480   -1.666850
+x_university_2               -0.77065   -0.450952    0.319698
+x_metropolitana_2             0.12689   -0.306232   -0.433121
+PH_female_2                   0.21425    0.027880   -0.186367
+theta_w_female_2             -0.66252   -0.120204    0.542316
+
+Settings and functions used in model definition:
+
+apollo_control
+--------------
+                       Value                              
+modelName              "Tc-sleep-ENUT-THPH1T1E-covariates"
+modelDescr             "Jara-Diaz model"                  
+indivID                "id_persona"                       
+outputDirectory        "output/"                          
+analyticGrad           "FALSE"                            
+noValidation           "FALSE"                            
+noDiagnostics          "TRUE"                             
+workInLogs             "FALSE"                            
+debug                  "FALSE"                            
+nCores                 "1"                                
+seed                   "13"                               
+mixing                 "FALSE"                            
+HB                     "FALSE"                            
+calculateLLC           "TRUE"                             
+analyticHessian        "FALSE"                            
+memorySaver            "FALSE"                            
+panelData              "FALSE"                            
+analyticGrad_manualSet "TRUE"                             
+overridePanel          "FALSE"                            
+preventOverridePanel   "FALSE"                            
+noModification         "FALSE"                            
+
+Hessian routines attempted
+--------------------------
+numerical second derivative of LL (using maxLik)
+
+
+apollo_lcPars
+---------------
+function (apollo_beta, apollo_inputs) 
+{
+    lcpars <- c()
+    lcpars[["PH"]] <- to_list(for (i in 1:nClass) get(paste0("PH_", 
+        i)))
+    for (co in covariates) {
+        lcpars[[paste0("PH_", co)]] <- to_list(for (i in 1:nClass) get(paste0("PH_", 
+            co, "_", i)))
+    }
+    lcpars[["theta_w"]] <- to_list(for (i in 1:nClass) get(paste0("theta_w_", 
+        i)))
+    for (co in covariates) {
+        lcpars[[paste0("theta_w_", co)]] <- to_list(for (i in 1:nClass) get(paste0("theta_w_", 
+            co, "_", i)))
+    }
+    lcpars[["sigma"]] <- to_list(for (i in 1:nClass) get(paste0("sigma_", 
+        i)))
+    V <- list()
+    V[["class_1"]] = asc_1 + female * x_female_1 + mayor45 * 
+        x_mayor45_1 + underage_in_household * x_underage_in_household_1 + 
+        only_worker * x_only_worker_1 + university * x_university_1 + 
+        metropolitana * x_metropolitana_1
+    V[["class_2"]] = asc_2 + female * x_female_2 + mayor45 * 
+        x_mayor45_2 + underage_in_household * x_underage_in_household_2 + 
+        only_worker * x_only_worker_2 + university * x_university_2 + 
+        metropolitana * x_metropolitana_2
+    classAlloc_settings <- list(classes = c(class_1 = 1, class_2 = 2), 
+        utilities = V)
+    lcpars[["pi_values"]] <- apollo_classAlloc(classAlloc_settings)
+    return(lcpars)
+}
+<bytecode: 0x55cf437c2128>
+
+
+apollo_probabilities
+----------------------
+function (apollo_beta, apollo_inputs, functionality = "estimate") 
+{
+    apollo_attach(apollo_beta, apollo_inputs)
+    on.exit(apollo_detach(apollo_beta, apollo_inputs))
+    P <- list()
+    for (s in 1:length(pi_values)) {
+        PH_value = PH[[s]] + female * PH_female[[s]]
+        theta_w_value = theta_w[[s]] + female * theta_w_female[[s]]
+        jaradiaz_settings <- list(Tw = apollo_inputs$database[, 
+            paste0("Tw_", s)], Tc = apollo_inputs$database[, 
+            paste0("Tc_", s)], Ec = apollo_inputs$database[, 
+            paste0("Ec_", s)], w = w, ta = ta, TH = 1, PH = PH_value, 
+            theta_w = theta_w_value, sigma = sigma[[s]], componentName = paste0("class_", 
+                s))
+        P[[paste0("class_", s)]] <- apollo_jaradiaz_2pi(jaradiaz_settings = jaradiaz_settings, 
+            functionality = functionality)
+    }
+    lc_settings <- list(inClassProb = P, classProb = pi_values)
+    P[["model"]] <- apollo_lc(lc_settings, apollo_inputs, functionality)
+    P <- apollo_prepareProb(P, apollo_inputs, functionality)
+    return(P)
+}
+<bytecode: 0x55cf4500e140>

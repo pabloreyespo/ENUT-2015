@@ -5,11 +5,12 @@ set.seed(42)
 
 est_set <- list(
   writeIter = FALSE,
-  silent = F,
+  silent = T,
   maxIterations=500,
   scaleHessian = F,
   scaleAfterConvergence = F,
   estimationRoutine = "bgw",
+  hessianRoutine = "maxLik",
   bgw_settings = list(maxFunctionEvals = 1000),
   validateGrad  = FALSE
 )
@@ -48,7 +49,7 @@ apollo_probabilities <- function(apollo_beta, apollo_inputs, functionality="esti
     sigma       = sigma,
     componentName = "model")
 
-  P[["model"]] <- apollo_jaradiaz(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
+  P[["model"]] <- apollo_jaradiaz_2pi(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
   P <- apollo_prepareProb(P, apollo_inputs, functionality)
   return(P)
 }
@@ -70,7 +71,7 @@ for (j in 1:nvals) {
       modelName       = modelName,
       modelDescr      = "Modelo Jara-Diaz",
       indivID         = "id_persona",
-      outputDirectory = "../output",
+      outputDirectory = "output",
       noValidation = TRUE,
       analyticGrad = TRUE,
       noDiagnostics = TRUE,
@@ -92,7 +93,7 @@ for (j in 1:nvals) {
   try(ans[j, 'state']    <-  model$message)
   try(ans[j, 'code']     <-  model$code)
   try({
-    if ((model$code==4&est_set$estimationRoutine=="bgw"|model$code==0&est_set$estimationRoutine=="bfgs") & (model$eigValue < 0)& (model$maximum > best_LL)) { #&
+    if ((model$code==4&est_set$estimationRoutine=="bgw"|model$code==0&est_set$estimationRoutine=="bfgs") & (model$eigValue <= 0)& (model$maximum > best_LL)) { #&
       best_LL <- model$maximum
       best_model <- model
       tryCatch(apollo_modelOutput(model), error=function(e) NULL)
@@ -103,6 +104,6 @@ for (j in 1:nvals) {
 library(glue)
 report_values_of_time_thph(best_model, model_data)
 
-
+apollo_saveOutput(best_model)
 
 

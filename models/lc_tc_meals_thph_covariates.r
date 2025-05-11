@@ -5,11 +5,12 @@ set.seed(42)
 
 est_set <- list(
   writeIter = FALSE,
-  silent = F,
+  silent = T,
   maxIterations=500,
   scaleHessian = F,
   scaleAfterConvergence = F,
-  estimationRoutine = "bfgs",
+  estimationRoutine = "bgw",
+  hessianRoutine = "maxLik",
   bgw_settings = list(maxFunctionEvals = 1000),
   validateGrad  = FALSE
 )
@@ -18,9 +19,9 @@ est_set <- list(
 ###########                     PRE ESTIMACIÓN                   ##########
 ###########################################################################
 nClass <- 2
-nvals <- 100
+nvals <- 200
 EM <- T
-EMiterMax <- 5
+EMiterMax <- 3
 modelName <- "Tc-meals-ENUT-THPH1T1E-covariates"
 socioecon   <- c("female", "mayor45", "underage_in_household", "only_worker", "university", "metropolitana")
 especificas <- c("asc", paste0("x_",socioecon))
@@ -75,7 +76,7 @@ apollo_probabilities <- function(apollo_beta, apollo_inputs, functionality="esti
                               theta_w     = theta_w_value,
                               sigma       = sigma[[s]],
                               componentName = paste0("class_",s))
-    P[[paste0("class_",s)]] <- apollo_jaradiaz(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
+    P[[paste0("class_",s)]] <- apollo_jaradiaz_2pi(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
   }
   lc_settings <- list(inClassProb = P, classProb=pi_values)
   P[["model"]] <- apollo_lc(lc_settings, apollo_inputs, functionality)
@@ -111,10 +112,21 @@ for (j in 1:nvals) {
   model <- NULL
   suppressWarnings({ try({
       if (EM) { #
-        invisible(capture.output( model <- apollo_lcEM(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs,
-                                     estimate_settings =  list(writeIter = FALSE, silent = T, scaleHessian = F, scaleAfterConvergence = F,validateGrad  = FALSE),
-                                     lcEM_settings = list(EMmaxIterations = EMiterMax, silent =T))))
-        apollo_beta <- model$estimate }
+        invisible(capture.output({
+           model <- apollo_lcEM(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs,
+                               estimate_settings =  list(
+                                 writeIter = FALSE,
+                                 silent = T,
+                                 scaleHessian = F,
+                                 scaleAfterConvergence = F,
+                                 validateGrad  = FALSE),
+                               lcEM_settings = list(
+                                 EMmaxIterations = EMiterMax,
+                                 silent =T,
+                                 postEM = 0))
+        }))
+        apollo_beta <- model$estimate
+      }
     model <- apollo_estimate(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs, estimate_settings= est_set)
     })
   })
@@ -128,8 +140,9 @@ for (j in 1:nvals) {
     if ((model$code==4&est_set$estimationRoutine=="bgw"|model$code==0&est_set$estimationRoutine=="bfgs") & (model$eigValue < 0)& (model$maximum > best_LL)) { #&
       best_LL <- model$maximum
       best_model <- model
+      apollo_saveOutput(best_model)
       tryCatch(apollo_modelOutput(model), error=function(e) NULL)
-      #break
+      break
     }})
 }
 name <- paste0("results/", modelName, ".csv")
