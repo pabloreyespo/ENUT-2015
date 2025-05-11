@@ -5,11 +5,12 @@ set.seed(42)
 
 est_set <- list(
   writeIter = FALSE,
-  silent = F,
+  silent = T,
   maxIterations=500,
   scaleHessian = F,
   scaleAfterConvergence = F,
-  estimationRoutine = "bfgs",
+  estimationRoutine = "bgw",
+  hessianRoutine = "maxLik",
   bgw_settings = list(maxFunctionEvals = 1000),
   validateGrad  = FALSE
 )
@@ -20,16 +21,24 @@ est_set <- list(
 nClass <- 4
 nvals <- 500
 EM <- T
-EMiterMax <- 10
+EMiterMax <- 3
 modelName <- "Tc-sleep-meals-ENUT-THPH1T1E"
 socioecon   <- c("female", "mayor45", "underage_in_household", "only_worker", "university", "metropolitana")
 especificas <- c("asc", paste0("x_",socioecon))
 get_data_2tc(especificas = socioecon, disputed = c("t_sleep", "t_meals"))
 model_data = model_data %>% filter(ec_1> 0, ec_2> 0, ec_3> 0, ec_4> 0)
 covariates <- c("female", "mayor45", "underage_in_household", "only_worker")
-testvals <- generate_initials_simple_tc_thph(def_sigma = 20, num = nvals, especificas = especificas, nClass=nClass,
-                                    guess_PH = rep(0.7180, nClass), guess_theta_w = rep(-0.1578, nClass) , guess_certainty = 0.3),
-                                    covariates = covariates)
+guess_PH = rep(0.7180, nClass)
+guess_theta_w = rep(-0.1578, nClass)
+testvals <- generate_initials_simple_tc_thph(
+  def_sigma = 20, 
+  num = nvals, 
+  especificas = especificas, 
+  nClass=nClass,
+  guess_PH = guess_PH, 
+  guess_theta_w = guess_theta_w, 
+  guess_certainty = 0.3,
+  covariates = covariates)
 ans <- c(paste0(names(testvals), '_initial'),
          paste0(names(testvals), '_est'),
          paste0(names(testvals), '_estSE'),
@@ -80,7 +89,7 @@ apollo_probabilities <- function(apollo_beta, apollo_inputs, functionality="esti
                               theta_w     = theta_w_value,
                               sigma       = sigma[[s]],
                               componentName = paste0("class_",s))
-    P[[paste0("class_",s)]] <- apollo_jaradiaz(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
+    P[[paste0("class_",s)]] <- apollo_jaradiaz_2pi(jaradiaz_settings = jaradiaz_settings, functionality = functionality)
   }
   lc_settings <- list(inClassProb = P, classProb=pi_values)
   P[["model"]] <- apollo_lc(lc_settings, apollo_inputs, functionality)
@@ -115,10 +124,22 @@ for (j in 1:nvals) {
 
   model <- NULL
   suppressWarnings({ try({
-      if (EM) { invisible(capture.output( model <- apollo_lcEM(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs,
-                                     estimate_settings =  list(writeIter = FALSE, silent = T, scaleHessian = F, scaleAfterConvergence = F,validateGrad  = FALSE),
-                                     lcEM_settings = list(EMmaxIterations = EMiterMax, silent =T))))
-        apollo_beta <- model$estimate }
+      if (EM) { #
+        invisible(capture.output({
+           model <- apollo_lcEM(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs,
+                               estimate_settings =  list(
+                                 writeIter = FALSE,
+                                 silent = T,
+                                 scaleHessian = F,
+                                 scaleAfterConvergence = F,
+                                 validateGrad  = FALSE),
+                               lcEM_settings = list(
+                                 EMmaxIterations = EMiterMax,
+                                 silent =T,
+                                 postEM = 0))
+        }))
+        apollo_beta <- model$estimate
+      }
     model <- apollo_estimate(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs, estimate_settings= est_set)
     })
   })
@@ -132,6 +153,7 @@ for (j in 1:nvals) {
     if ((model$code==4&est_set$estimationRoutine=="bgw"|model$code==0&est_set$estimationRoutine=="bfgs") & (model$eigValue < 0)& (model$maximum > best_LL)) { #&
       best_LL <- model$maximum
       best_model <- model
+      apollo_saveOutput(best_model)
       tryCatch(apollo_modelOutput(model), error=function(e) NULL)
       #break
     }})
@@ -156,7 +178,7 @@ cat(dbs[,paste0("pi_",1:nClass)] %>% max.col() %>% table() / nrow(dbs), "\n")
 proportions <- c(socioecon,"menor25","n_menores6","n_menores12","vive_pareja","e0", "e1", "e2", "e3","q1", "q2", "q3", "q4", "q5",
                  "Norte_grande", "Norte_chico", "Zona_centro", "Zona_sur", "Zona_austral",
                  "fuentes_externas", "trabajador_obrero", "trabajador_privilegiado")
-socioecon_plus   <- c("edad_años", "n_personas", "n_menores", "w", "I","ec_1","ec_2","ing_trab")
+socioecon_plus   <- c("edad_anios", "n_personas", "n_menores", "w", "I","ec_1","ec_2","ing_trab")
 mean_values <- get_segment_probabilities(dbs, socioecon_plus, proportions, tc=T)
 print(mean_values)
 

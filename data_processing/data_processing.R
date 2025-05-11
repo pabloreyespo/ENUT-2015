@@ -75,7 +75,7 @@ data_post <- data_to168hours(data_post) # TODO probar distintos posicionamientos
 ### Continuar con la imputación de gastos, está la opción de usar fractional logit para imputar los gastos
 #aux <- data_post %>% filter(ing_trab > 0, tt > 0, trabaja == 1) %>%
 #  mutate(w = ing_trab / tt) %>%
-#  dplyr::select(ing_personal, ing_trab, w, tt, edad_años, trabaja)
+#  dplyr::select(ing_personal, ing_trab, w, tt, edad_anios, trabaja)
 
 data_descargable <- agregar_actividades(data_post)
 data25 <- data_descargable[["data25"]] %>% mutate(w = ing_trab / t_to)
