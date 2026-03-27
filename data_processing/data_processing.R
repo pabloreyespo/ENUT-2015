@@ -47,7 +47,7 @@ data_outliers <- data_outliers %>% dplyr::select(
   all_of(identificadores),
   dia_semana,
   dia_fin_semana,
-  k31_1_1, k31_1_2, k31_1_3,
+  horas_trabajo_habituales, dias_trabajo_semana, horas_trabajo_contratadas,
   #c5:c14,
   all_of(composicion_hogar),
   all_of(proveedores_externos),
@@ -102,6 +102,13 @@ haven::write_dta(data25G, "data/enut-i-25G.dta")
 haven::write_dta(data11G, "data/enut-i-11G.dta")
 write_csv(data25G, "data/enut-i-25G.csv")
 write_csv(data11G, "data/enut-i-11G.csv")
+
+data25G_ENG <- rename_to_english_25(data25G)
+data11G_ENG <- rename_to_english_11(data11G)
+haven::write_dta(data25G_ENG, "data/enut-i-25G-ENG.dta")
+haven::write_dta(data11G_ENG, "data/enut-i-11G-ENG.dta")
+write_csv(data25G_ENG, "data/enut-i-25G-ENG.csv")
+write_csv(data11G_ENG, "data/enut-i-11G-ENG.csv")
 
 ggplot(data11G, aes(x = w)) + geom_histogram(bins = 50)
 
