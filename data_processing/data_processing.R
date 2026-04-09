@@ -8,6 +8,7 @@ source("data_processing/processing_functions.R")
 ## PREPROCESAMIENTO DE DATOS
 data <- haven::read_dta("data/raw/BASE_USUARIO_corregida.dta")
 data <- new_variables_prefilter(data)
+
 data <- na_completion(data)
 data <- new_variables_postfilter(data)
 
@@ -46,7 +47,7 @@ data_outliers <- data_outliers %>% dplyr::select(
   all_of(identificadores),
   dia_semana,
   dia_fin_semana,
-  k31_1_1, k31_1_2, k31_1_3,
+  horas_trabajo_habituales, dias_trabajo_semana, horas_trabajo_contratadas,
   #c5:c14,
   all_of(composicion_hogar),
   all_of(proveedores_externos),
@@ -74,41 +75,62 @@ data_post <- data_to168hours(data_post) # TODO probar distintos posicionamientos
 ### Continuar con la imputación de gastos, está la opción de usar fractional logit para imputar los gastos
 #aux <- data_post %>% filter(ing_trab > 0, tt > 0, trabaja == 1) %>%
 #  mutate(w = ing_trab / tt) %>%
-#  dplyr::select(ing_personal, ing_trab, w, tt, edad_años, trabaja)
+#  dplyr::select(ing_personal, ing_trab, w, tt, edad_anios, trabaja)
 
 data_descargable <- agregar_actividades(data_post)
-data22 <- data_descargable[["data22"]] %>% mutate(w = ing_trab / t_to)
-data11 <- data_descargable[["data11"]] %>% mutate(w = ing_trab / t_paid_work)
-haven::write_dta(data22, "data/enut-i-22.dta")
-haven::write_dta(data11, "data/enut-i-11.dta")
-write_csv(data22, "data/enut-i-22.csv")
-write_csv(data11, "data/enut-i-11.csv")
+data_raw  <- data_descargable[["data25"]] %>% mutate(w = ing_trab / t_to)
+data_enut <- data_descargable[["data11"]] %>% mutate(w = ing_trab / Tw)
+haven::write_dta(data_raw,  "data/enut-i-25.dta")
+haven::write_dta(data_enut, "data/enut-i-11.dta")
+write_csv(data_raw,  "data/enut-i-25.csv")
+write_csv(data_enut, "data/enut-i-11.csv")
 
 
 source("data_processing/processing_functions.R")
 
-data22 = haven::read_dta( "data/enut-i-22.dta")
-data11 = haven::read_dta( "data/enut-i-11.dta")
+data_raw  <- haven::read_dta("data/enut-i-25.dta")
+data_enut <- haven::read_dta("data/enut-i-11.dta")
 
-table(data22$es_trabajador)
-table(data22$es_familia)
+table(data_raw$es_trabajador)
+table(data_raw$es_familia)
 
 ## ----- Análisis datos resultantes -----------------
-data11G <- imputacion_gastos(data11)
-data22G <- imputacion_gastos(data22)
+data_raw_G  <- imputacion_gastos(data_raw)
+data_enut_G <- imputacion_gastos(data_enut)
 
-haven::write_dta(data22G, "data/enut-i-22G.dta")
-haven::write_dta(data11G, "data/enut-i-11G.dta")
-write_csv(data22G, "data/enut-i-22G.csv")
-write_csv(data11G, "data/enut-i-11G.csv")
+# Agregando las categorias de gasto y limpiando las demas
+data_enut_G <- data_enut_G %>%
+  mutate(
+    Ef_food           = alimentos,
+    Ef_recreation     = recreacion,
+    Ef_restaurants    = restaurantes,
+    Ef_communications = comunicaciones,
+    Ef_clothing       = vestimenta,
+    Ec = cuentas + hogar + salud + transporte + educacion + savings
+  ) %>%
+  dplyr::select(-c(alimentos, recreacion, restaurantes, comunicaciones,
+                   vestimenta, cuentas, hogar, salud, transporte, educacion,
+                   savings, total_expenses))
 
-ggplot(data11G, aes(x = w)) + geom_histogram(bins = 50)
+haven::write_dta(data_raw_G,  "data/enut-i-raw.dta")
+haven::write_dta(data_enut_G, "data/enut-i.dta")
+write_csv(data_raw_G,  "data/enut-i-raw.csv")
+write_csv(data_enut_G, "data/enut-i.csv")
+
+data_raw_G_ENG  <- rename_to_english_raw(data_raw_G)
+data_enut_G_ENG <- rename_to_english_enut(data_enut_G)
+haven::write_dta(data_raw_G_ENG,  "data/enut-i-raw-ENG.dta")
+haven::write_dta(data_enut_G_ENG, "data/enut-i-ENG.dta")
+write_csv(data_raw_G_ENG,  "data/enut-i-raw-ENG.csv")
+write_csv(data_enut_G_ENG, "data/enut-i-ENG.csv")
+
+ggplot(data_enut_G, aes(x = w)) + geom_histogram(bins = 50)
 
 # data_aux[data_aux==0] <- NA
 
 ######## PARA TABLAS DE DATOS #######
 
-#medias <- data22 %>%
+#medias <- data25 %>%
 #  dplyr::select(id_persona, tt:tv) %>%
 #  melt(measure.vars = 2:26, variable.name = "tipo.tiempo") %>%
 #  mutate(value = as.numeric(value)) %>% mutate(participa = case_when(value > 0 ~ 1, T ~ 0)) %>%

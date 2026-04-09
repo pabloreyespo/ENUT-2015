@@ -30,7 +30,10 @@ acts_corregidas <- c(
     "t_ed",
     "t_vsyo_csar", # convivencia social y actividades recreativas
     "t_vsyo_aa", # arte y aficiones
-    "t_mcm",
+    't_mcm_leer',
+    't_mcm_video',
+    't_mcm_audio',
+    't_mcm_computador',
     "t_tt1" # traslados enut 2015
   )
 
@@ -47,19 +50,33 @@ t_agregados <- c(
   "t_sleep",
   "t_commute1")
 
+t_agregados_new <- c(
+  "Tw",
+  "Tf_social",
+  "Tf_hobbies",
+  "Tf_read",
+  "Tf_listen",
+  "Tf_watch",
+  "Tf_computer",
+  "Tc_meals",
+  "Tc_sleep",
+  "Tc_other"
+)
+
 
 identificadores <- c("id_persona", "id_hogar")
 composicion_hogar <- c("parentesco",
-                       "n_menores6",
-                       "n_menores12",
-                       "n_men15",
-                       "n_menores18",
+                       "n_menores_0_5",
+                       "n_menores_6_11",
+                       "n_menores_0_14",
+                       "n_menores_12_17",
                        "n_menores",
                        "n_mayores",
                        "n_tiempo",
                        "n_trabajadores",
                        "n_profesionales",
-                       "hay_tercera",
+                       "n_tercera_edad",
+                       "hay_tercera_edad",
                        "n_personas",
                        "edad_promedio",
                        "tiene_hijos",
@@ -67,16 +84,18 @@ composicion_hogar <- c("parentesco",
                        "vive_pareja")
 
 sociodemograficas <- c("sexo",
-                       "edad_años",
+                       "edad_anios",
                        "tramo_edad",
                        "nivel_escolaridad",
                        "estudia",
                        "trabaja",
-                       "horas_trabajo",
+                       "horas_trabajo_contratadas",
+                       "horas_trabajo_habituales",
+                       "dias_trabajo_semana",
                        "quintil",
                        "macrozona",
                        "region",
-                       "prop_hogar")
+                       "prop_ing_hogar")
 laborales <- c("cae", "cise", "ciuo_agrupada")
 proveedores_externos <- c("servicio_domestico", "ayuda_cercanos", "fuentes_externas")
 ingresos     <- c("ing_ocuppal", "ing_trab", "ing_jub_aps", "ing_g", "ing_mon", "ing_mon_pc", "ing_gpp", "ing_personal", "ingreso_hogar" ,"income_person_week")
@@ -91,10 +110,10 @@ new_variables_prefilter<- function(data) { # OJO, DEBEN ENTRAR TODOS INDEPENDIEN
   data <- data %>%
   mutate(
     menor_edad        = case_when(c14_1_1 < 18 ~ 1, TRUE ~ 0),
-    menor6            = case_when(c14_1_1 < 6 ~ 1, TRUE ~ 0),
-    menor12           = case_when(c14_1_1 >= 6 & c14_1_1 < 12 ~ 1, TRUE ~ 0),
-    men15             = case_when(c14_1_1 < 15 ~ 1, TRUE ~ 0),
-    menor18           = case_when(c14_1_1 >= 12 & c14_1_1 < 18 ~ 1, TRUE ~ 0),
+    menor_0_5         = case_when(c14_1_1 < 6 ~ 1, TRUE ~ 0),
+    menor_6_11        = case_when(c14_1_1 >= 6 & c14_1_1 < 12 ~ 1, TRUE ~ 0),
+    menor_0_14        = case_when(c14_1_1 < 15 ~ 1, TRUE ~ 0),
+    menor_12_17       = case_when(c14_1_1 >= 12 & c14_1_1 < 18 ~ 1, TRUE ~ 0),
     menor25           = case_when(c14_1_1 <= 25 ~ 1, TRUE ~ 0),
     mayor_edad        = case_when(c14_1_1 >= 18 ~ 1, TRUE ~ 0),
     tercera_edad      = case_when(c14_1_1 >= 60 ~ 1, TRUE ~ 0),
@@ -116,18 +135,18 @@ new_variables_prefilter<- function(data) { # OJO, DEBEN ENTRAR TODOS INDEPENDIEN
   data <- data %>%
     group_by(id_hogar) %>%
     mutate(n_menores = sum(menor_edad,na.rm=TRUE),
-           n_menores6 = sum(menor6,na.rm=TRUE),
-           n_menores12 = sum(menor12,na.rm=TRUE),
-           n_men15 = sum(men15,na.rm=TRUE),
-           n_menores18 = sum(menor18,na.rm=TRUE),
+           n_menores_0_5  = sum(menor_0_5,  na.rm=TRUE),
+           n_menores_6_11 = sum(menor_6_11, na.rm=TRUE),
+           n_menores_0_14 = sum(menor_0_14, na.rm=TRUE),
+           n_menores_12_17= sum(menor_12_17,na.rm=TRUE),
            n_menores25 = sum(menor25, na.rm=TRUE),
            n_mayores = sum(mayor_edad,na.rm=TRUE),
-           n_tercera = sum(tercera_edad,na.rm=TRUE),
+           n_tercera_edad = sum(tercera_edad,na.rm=TRUE),
            n_tiempo = sum(tiempo),
            n_trabajadores = sum(trabaja),
            n_profesionales = sum(nivel_escolaridad >=4 ),
            edad_promedio = mean(c14_1_1)) %>%
-    mutate(hay_tercera = case_when(n_tercera > 1 ~ 1 & tercera_edad == 0,  T ~ 0),
+    mutate(hay_tercera_edad = case_when(n_tercera_edad > 1 ~ 1 & tercera_edad == 0,  T ~ 0),
            n_personas = n_menores + n_mayores) %>%
     ungroup()
 
@@ -155,9 +174,9 @@ new_variables_prefilter<- function(data) { # OJO, DEBEN ENTRAR TODOS INDEPENDIEN
     mutate(ing_gpp = sum(ing_g) * prop_ingresos) %>%
     mutate(income_person_week = (sum(ingresos_propios) + ing_gpp) / n()) %>% ungroup() %>%
     mutate(ingreso_personal = ing_trab + ing_jub_aps + ing_gpp) %>%
-    group_by(id_hogar) %>% mutate(prop_hogar = ingreso_personal / sum(ingreso_personal))%>%
+    group_by(id_hogar) %>% mutate(prop_ing_hogar = ingreso_personal / sum(ingreso_personal))%>%
     ungroup() %>%
-    mutate_at(c("prop_hogar", "ingreso_hogar", "ing_gpp", "income_person_week", "ingreso_personal"),
+    mutate_at(c("prop_ing_hogar", "ingreso_hogar", "ing_gpp", "income_person_week", "ingreso_personal"),
               ~replace_na(.,0))
 
   return(data)
@@ -175,6 +194,7 @@ na_completion <- function(data) {
     mutate_at(c("c14_1_1","m14_1_1","m14_2_1","k42_1_1","k15_1_1",
                 "l15_1_1","l16_1_1","l17_1_1","l117_1_1", "l118_1_1","l119_1_1"),
               ~ifelse(is.na(.), 85, .)) %>%
+    filter(if_all(c('q11_1_2', 'q11_2_2', 'm11_1_2', 'm11_2_2'), ~ !.x  %in% 96)) %>%
     #filter(if_all(n_linea_p:te_ayuda_cercanos, ~ !.x  %in% 96)) %>%
     #filter(l110_1_1 != 1 & l122_1_1 != 1) %>% # en cama enfermos
     #filter(l111_1_1 != 1 & l123_1_1 != 1) %>%# pasaron cosas fuera de lo común
@@ -229,15 +249,17 @@ new_variables_postfilter <- function(data) {
                     "ing_gpp", "ing_personal", "ingreso_hogar", "income_person_week")
 
   data <- data %>%
-    mutate(horas_trabajo = case_when(k31_1_3 > 0 ~ k31_1_3, T ~ 0),
+    mutate(horas_trabajo_contratadas = case_when(k31_1_3 > 0 ~ k31_1_3, T ~ 0),
+           horas_trabajo_habituales  = case_when(k31_1_1 > 0 ~ k31_1_1, T ~ 0),
+           dias_trabajo_semana       = case_when(k31_1_2 > 0 ~ k31_1_2, T ~ 0),
            macrozona = case_when(region <= 5 | region == 15 ~ "norte",
                                  region ==13 ~ "metropolitana",
                                  region <= 8 & region > 5 ~ "centro",
                                  TRUE ~ "sur"),
-           edad_años = c14_1_1,
-           tramo_edad = case_when(edad_años <=24 ~ "12-24",
-                                  edad_años <=44 ~ "25-44",
-                                  edad_años <=65 ~ "45-65",
+           edad_anios = c14_1_1,
+           tramo_edad = case_when(edad_anios <=24 ~ "12-24",
+                                  edad_anios <=44 ~ "25-44",
+                                  edad_anios <=65 ~ "45-65",
                                   T            ~ "66+"),
            estudia = abs(abs(d14_1_1-1)-1),
            n_menores  = case_when(n_menores  <= 3 ~ n_menores , T ~ 4),
@@ -318,7 +340,11 @@ get_25activities <- function(data) {
   # ocio
   act_t_vsyo_csar <- act_ocio_social <- c("s11", "s21", "s22", "s23") # social y eventos pueden ser mezclables
   act_t_vsyo_aa <- c("s31", "s32", "s41")
-  act_t_mcm <- c("s51", "s52", "s53", "s54")
+
+  act_t_mcm_leer       <- c("s51")
+  act_t_mcm_video      <- c("s52")
+  act_t_mcm_audio      <- c("s53")
+  act_t_mcm_computador <- c("s54")
 
   # cuidados personales
   act_t_cpaf_cp <- c("q12", "q17")
@@ -349,7 +375,10 @@ get_25activities <- function(data) {
       t_ed_ds = dplyr::select(., paste0(act_t_ed, "_1_2")) %>% rowSums(na.rm = T),
       t_vsyo_csar_ds = dplyr::select(., paste0(act_t_vsyo_csar, "_1_2")) %>% rowSums(na.rm = T),
       t_vsyo_aa_ds = dplyr::select(., paste0(act_t_vsyo_aa, "_1_2")) %>% rowSums(na.rm = T),
-      t_mcm_ds = dplyr::select(., paste0(act_t_mcm, "_1_2")) %>% rowSums(na.rm = T),
+      t_mcm_leer_ds = dplyr::select(., paste0(act_t_mcm_leer, "_1_2")) %>% rowSums(na.rm = T),
+      t_mcm_video_ds = dplyr::select(., paste0(act_t_mcm_video, "_1_2")) %>% rowSums(na.rm = T),
+      t_mcm_audio_ds = dplyr::select(., paste0(act_t_mcm_audio, "_1_2")) %>% rowSums(na.rm = T),
+      t_mcm_computador_ds = dplyr::select(., paste0(act_t_mcm_computador, "_1_2")) %>% rowSums(na.rm = T),
       t_cpaf_cp_ds = dplyr::select(., paste0(act_t_cpaf_cp, "_1_2")) %>% rowSums(na.rm = T),
       t_cpag_comer_ds = dplyr::select(., paste0(act_t_cpag_comer, "_1_2")) %>% rowSums(na.rm = T),
       t_cpag_dormir_ds = dplyr::select(., paste0(act_t_cpag_dormir, "_1_2")) %>% rowSums(na.rm = T),
@@ -372,7 +401,10 @@ get_25activities <- function(data) {
       t_ed_fds = dplyr::select(., paste0(act_t_ed, "_2_2")) %>% rowSums(na.rm = T),
       t_vsyo_csar_fds = dplyr::select(., paste0(act_t_vsyo_csar, "_2_2")) %>% rowSums(na.rm = T),
       t_vsyo_aa_fds = dplyr::select(., paste0(act_t_vsyo_aa, "_2_2")) %>% rowSums(na.rm = T),
-      t_mcm_fds = dplyr::select(., paste0(act_t_mcm, "_2_2")) %>% rowSums(na.rm = T),
+      t_mcm_leer_fds = dplyr::select(., paste0(act_t_mcm_leer, "_2_2")) %>% rowSums(na.rm = T),
+      t_mcm_video_fds = dplyr::select(., paste0(act_t_mcm_video, "_2_2")) %>% rowSums(na.rm = T),
+      t_mcm_audio_fds = dplyr::select(., paste0(act_t_mcm_audio, "_2_2")) %>% rowSums(na.rm = T),
+      t_mcm_computador_fds = dplyr::select(., paste0(act_t_mcm_computador, "_2_2")) %>% rowSums(na.rm = T),
       t_cpaf_cp_fds = dplyr::select(., paste0(act_t_cpaf_cp, "_2_2")) %>% rowSums(na.rm = T),
       t_cpag_comer_fds = dplyr::select(., paste0(act_t_cpag_comer, "_2_2")) %>% rowSums(na.rm = T),
       t_cpag_dormir_fds = dplyr::select(., paste0(act_t_cpag_dormir, "_2_2")) %>% rowSums(na.rm = T),
@@ -433,7 +465,7 @@ impute_weekend <- function(data, twin_matrix) {
     mutate_at(domingos, ~ . * 24 / sum_domingos) %>%
     mutate(sum_sabados = dplyr::select(., all_of(sabados)) %>% rowSums(na.rm = TRUE),
            sum_domingos = dplyr::select(., all_of(domingos)) %>% rowSums(na.rm = TRUE)) %>%
-    mutate_at(dias_semana, ~case_when((k31_1_2 < 5) & (k31_1_2 > 0) ~ . *k31_1_2, T ~ .* 5 ))
+    mutate_at(dias_semana, ~case_when((dias_trabajo_semana < 5) & (dias_trabajo_semana > 0) ~ . * dias_trabajo_semana, T ~ . * 5))
 
   temp <- data_post[,"t_to_ds"]
   data_post[,"t_to_ds"] <- 0
@@ -449,20 +481,20 @@ impute_weekend <- function(data, twin_matrix) {
 
 diagnostico_trabajo <- function(data, plots, intercuartil) {
   diagnostico <- data %>%
-    mutate(diferencia = t_to - k31_1_3)
+    mutate(diferencia = t_to - horas_trabajo_contratadas)
 
   cat("Número inicial de filas",nrow(diagnostico), end = "\n")
 
   if (plots) {
-    ggplot(diagnostico, aes(x = k31_1_1)) + geom_histogram(binwidth = 1)
-    ggplot(diagnostico, aes(x = k31_1_2)) + geom_histogram(binwidth = 1)
-    ggplot(diagnostico, aes(x = k31_1_3)) + geom_histogram(binwidth = 1)
+    ggplot(diagnostico, aes(x = horas_trabajo_habituales)) + geom_histogram(binwidth = 1)
+    ggplot(diagnostico, aes(x = dias_trabajo_semana)) + geom_histogram(binwidth = 1)
+    ggplot(diagnostico, aes(x = horas_trabajo_contratadas)) + geom_histogram(binwidth = 1)
     ggplot(diagnostico, aes(x = t_to)) + geom_histogram(binwidth = 1)
     ggplot(diagnostico, aes(x = diferencia)) + geom_histogram(binwidth = 1)
   }
 
   if (intercuartil) {
-    cuantiles <- quantile(diagnostico[(diagnostico$t_to > 0) | (diagnostico$k31_1_3 > 0),]$diferencia, c(0.25, 0.75))
+    cuantiles <- quantile(diagnostico[(diagnostico$t_to > 0) | (diagnostico$horas_trabajo_contratadas > 0),]$diferencia, c(0.25, 0.75))
     intercuantil <- cuantiles[2] - cuantiles[1]
     diagnostico <- diagnostico %>% filter(diferencia < cuantiles[2] + intercuantil, diferencia > cuantiles[1] - intercuantil)
     cat("Número final de filas",nrow(diagnostico))
@@ -476,7 +508,7 @@ diagnostico_trabajo <- function(data, plots, intercuartil) {
 
 adjust_working_hours <- function(data, normalize = TRUE) {
   act_ajustar <- acts_corregidas[!acts_corregidas %in% c("t_to")]
-  data <- data %>% mutate(t_to = horas_trabajo)
+  data <- data %>% mutate(t_to = horas_trabajo_contratadas)
 
   # if (normalize) {
   #   data <- data %>%
@@ -493,6 +525,23 @@ agregar_actividades <- function(data_post) {
 
   data_post <- data_post %>%
     mutate(
+      Tw = t_to,
+      Tf_social = t_vsyo_csar,
+      Tf_hobbies = t_vsyo_aa,
+      Tf_read = t_mcm_leer,
+      Tf_listen = t_mcm_audio,
+      Tf_watch = t_mcm_video,
+      Tf_computer = t_mcm_computador,
+      Tc_meals = t_cpag_comer,
+      Tc_sleep = t_cpag_dormir,
+      Tc_other = dplyr::select(., c(
+        "t_to_js",
+        "t_tdnr_psc", "t_tdnr_lv", "t_tdnr_lrc", "t_tdnr_mrm",
+        "t_tdnr_admnhog", "t_tdnr_comphog", "t_tdnr_cmp",
+        "t_tcnr_ce", "t_tcnr_re", "t_tcnr_oac",
+        "t_tvaoh_tv", "t_tvaoh_oh",
+        "t_cpaf_cp", "t_ed", "t_tt1"
+      )) %>% rowSums(na.rm = TRUE),
       t_paid_work = t_to, # free
       t_job_search = t_to_js, # free
       t_domestic_work = dplyr::select(., c("t_tdnr_psc", "t_tdnr_lv", "t_tdnr_lrc", "t_tdnr_mrm",
@@ -502,7 +551,7 @@ agregar_actividades <- function(data_post) {
         rowSums(na.rm = TRUE),  # commited/free
       t_unpaid_voluntary = t_tvaoh_tv + t_tvaoh_oh, # free
       t_education = t_ed, # committed / free
-      t_leisure = t_vsyo_csar + t_vsyo_aa + t_mcm, # free
+      t_leisure = t_vsyo_csar + t_vsyo_aa + t_mcm_leer + t_mcm_video + t_mcm_audio + t_mcm_computador, # free
       t_personal_care = t_cpaf_cp, #committed/free
       t_meals         = t_cpag_comer, #committed/free
       t_sleep = t_cpag_dormir, #committed/free
@@ -514,7 +563,7 @@ agregar_actividades <- function(data_post) {
       es_familia = case_when(trabaja == 1 & cae == "Ocupada(o)" & t_to > 0 & vive_pareja == 1 & tiene_hijos ==1  ~ 1, T ~0))
 
 
-  data22 <- data_post %>% dplyr::select(
+  data25 <- data_post %>% dplyr::select(
     all_of(identificadores),
     all_of(tipo_muestra),
     dia_semana, dia_fin_semana,
@@ -527,11 +576,11 @@ agregar_actividades <- function(data_post) {
     all_of(acts_corregidas)) %>%
     mutate(t_total = dplyr::select(., all_of(acts_corregidas)) %>% rowSums(na.rm = TRUE))
 
-  data22[,acts_corregidas]  = round(data22[,acts_corregidas],2)
-  data22[,"temp"] = rowSums(data22[,acts_corregidas])
-  data22[,"t_cpag_dormir"]       = data22[,"t_cpag_dormir"] - (data22[,"temp"] - 168)
-  data22[,"temp"] = rowSums(data22[,acts_corregidas])
-  data22 <- data22 %>% dplyr::select(-c("temp"))
+  data25[,acts_corregidas]  = round(data25[,acts_corregidas],2)
+  data25[,"temp"] = rowSums(data25[,acts_corregidas])
+  data25[,"t_cpag_dormir"]       = data25[,"t_cpag_dormir"] - (data25[,"temp"] - 168)
+  data25[,"temp"] = rowSums(data25[,acts_corregidas])
+  data25 <- data25 %>% dplyr::select(-c("temp"))
 
   data11 <- data_post %>%
     dplyr::select(
@@ -544,15 +593,18 @@ agregar_actividades <- function(data_post) {
       all_of(laborales),
       t11_1_1:t15_1_1,
       all_of(ingresos),
-      all_of(t_agregados)) %>%
+      all_of(t_agregados),
+      all_of(t_agregados_new)) %>%
   mutate(t_total = dplyr::select(., all_of(t_agregados)) %>% rowSums(na.rm = TRUE))
 
-  data11[,t_agregados]  = round(data11[,t_agregados],2)
-  data11[,"temp"] = rowSums(data11[,t_agregados])
-  data11[,"t_sleep"]  = data11[,"t_sleep"] - (data11[,"temp"] - 168)
-  data11[,"temp"] = rowSums(data11[,t_agregados])
+  data11[, c(t_agregados, t_agregados_new)] <- round(data11[, c(t_agregados, t_agregados_new)], 2)
+  data11[, "temp"] <- rowSums(data11[, t_agregados])
+  data11[, "t_sleep"]   <- data11[, "t_sleep"]   - (data11[, "temp"] - 168)
+  data11[, "Tc_sleep"]  <- data11[, "Tc_sleep"]  - (data11[, "temp"] - 168)
+  data11[, "temp"] <- rowSums(data11[, t_agregados])
+  data11 <- data11 %>% dplyr::select(-c("temp"))
 
-  return(list(data22 = data22, data11= data11))
+  return(list(data25 = data25, data11 = data11))
 }
 ###### MANTENER POR AHI ########
 # grupos <- data %>%
@@ -563,14 +615,14 @@ agregar_actividades <- function(data_post) {
 imputacion_gastos <- function(data) {
   library("minpack.lm")
   data_hogar <- data %>%
-    dplyr::select(id_hogar, n_personas, n_menores6, n_menores12, n_menores18, n_menores, n_trabajadores, n_personas,
+    dplyr::select(id_hogar, n_personas, n_menores_0_5, n_menores_6_11, n_menores_12_17, n_menores, n_trabajadores, n_personas,
                   edad_promedio, quintil, macrozona, ingreso_hogar, income_person_week, n_profesionales) %>%
     distinct(id_hogar, .keep_all = T) %>%
-    mutate(n_personas_cut = case_when(n_personas >= 7 ~ 7, T ~ n_personas),
-           n_menores6_cut = case_when(n_menores6 >= 3 ~ 3, T ~ n_menores12),
-           n_menores12_cut = case_when(n_menores12 >= 2 ~ 3, T ~ n_menores12),
-           n_menores18_cut = case_when(n_menores18 >= 2 ~ 3, T ~ n_menores18),
-           n_trabajadores_cut = case_when(n_trabajadores >= 3 ~ 3, T ~ n_trabajadores),
+    mutate(n_personas_cut      = case_when(n_personas      >= 7 ~ 7, T ~ n_personas),
+           n_menores_0_5_cut   = case_when(n_menores_0_5   >= 3 ~ 3, T ~ n_menores_0_5),
+           n_menores_6_11_cut  = case_when(n_menores_6_11  >= 2 ~ 3, T ~ n_menores_6_11),
+           n_menores_12_17_cut = case_when(n_menores_12_17 >= 2 ~ 3, T ~ n_menores_12_17),
+           n_trabajadores_cut  = case_when(n_trabajadores  >= 3 ~ 3, T ~ n_trabajadores),
            n_profesionales_cut = case_when(n_profesionales >= 2 ~ 3, T ~ n_profesionales))
   #hist(gastos$savings/gastos$ingresos, breaks =100)
   gastos  <<- read.csv("data/gastos.csv") %>% filter(ingreso_hogar > 0, savings/ingreso_hogar > -1)
@@ -579,7 +631,7 @@ imputacion_gastos <- function(data) {
   lin_reg <<- lm(savings ~
                      ingreso_hogar +
                      (quintil==2) + (quintil==3) + (quintil==4) + (quintil==5) +
-                     n_menores6_cut + n_menores12_cut + n_menores18_cut+ n_personas_cut +
+                     n_menores_0_5_cut + n_menores_6_11_cut + n_menores_12_17_cut + n_personas_cut +
                      n_trabajadores_cut  + n_profesionales_cut +
                      edad_promedio +
                      (macrozona == "metropolitana") ,
@@ -635,7 +687,7 @@ imputacion_gastos <- function(data) {
   data_hogar[,alts] = sweep(data_hogar[,alts], 1, unlist(data_hogar[,"ingreso_hogar"] - data_hogar[,"savings"]), "*")
 
   data <- merge(data, data_hogar[,c("id_hogar", "savings", alts)], by = "id_hogar", all.x = TRUE)
-  data[,c("savings", alts)] = sweep(data[,c("savings", alts)], 1, unlist(data[,"prop_hogar"]), "*")
+  data[,c("savings", alts)] = sweep(data[,c("savings", alts)], 1, unlist(data[,"prop_ing_hogar"]), "*")
   data[,"total_expenses"] = data[,"ing_personal"] - data["savings"]
 
   data[,alts] = round(data[,alts], 2)
@@ -647,4 +699,112 @@ imputacion_gastos <- function(data) {
   # data[, "w"] = data[, "w"] * 1000
 
   return(data)
+}
+
+.rename_common_eng <- c(
+  # identifiers
+  id_person            = "id_persona",
+  id_household         = "id_hogar",
+  # sample type
+  is_worker            = "es_trabajador",
+  is_family            = "es_familia",
+  # diary
+  weekday              = "dia_semana",
+  weekend_day          = "dia_fin_semana",
+  # household composition
+  relationship_to_head = "parentesco",
+  n_children_0_5       = "n_menores_0_5",
+  n_children_6_11      = "n_menores_6_11",
+  n_children_0_14      = "n_menores_0_14",
+  n_youth_12_17        = "n_menores_12_17",
+  n_underage           = "n_menores",
+  n_adults             = "n_mayores",
+  n_time_reporters     = "n_tiempo",
+  n_workers            = "n_trabajadores",
+  n_professionals      = "n_profesionales",
+  n_elderly            = "n_tercera_edad",
+  has_elderly          = "hay_tercera_edad",
+  household_size       = "n_personas",
+  mean_age             = "edad_promedio",
+  has_children         = "tiene_hijos",
+  in_couple            = "en_pareja",
+  lives_with_partner   = "vive_pareja",
+  # external support
+  domestic_service     = "servicio_domestico",
+  help_from_relatives  = "ayuda_cercanos",
+  external_support     = "fuentes_externas",
+  # sociodemographics
+  female               = "sexo",
+  age                  = "edad_anios",
+  age_bracket          = "tramo_edad",
+  education_level      = "nivel_escolaridad",
+  in_education         = "estudia",
+  employed             = "trabaja",
+  contracted_hours     = "horas_trabajo_contratadas",
+  usual_hours          = "horas_trabajo_habituales",
+  work_days_per_week   = "dias_trabajo_semana",
+  quintile             = "quintil",
+  macrozone            = "macrozona",
+  region               = "region",
+  income_share         = "prop_ing_hogar",
+  # labor
+  employment_status    = "cae",
+  occupation_group     = "ciuo_agrupada",
+  # income
+  inc_main_job         = "ing_ocuppal",
+  inc_labor            = "ing_trab",
+  inc_pension          = "ing_jub_aps",
+  inc_group            = "ing_g",
+  inc_group_personal   = "ing_gpp",
+  inc_personal         = "ing_personal",
+  household_income     = "ingreso_hogar",
+  inc_person_week      = "income_person_week",
+  # derived
+  wage                 = "w",
+  # expenditures
+  food                 = "alimentos",
+  clothing             = "vestimenta",
+  utilities            = "cuentas",
+  household_goods      = "hogar",
+  health               = "salud",
+  transportation       = "transporte",
+  communications       = "comunicaciones",
+  recreation           = "recreacion",
+  education_exp        = "educacion",
+  restaurants          = "restaurantes"
+)
+
+rename_to_english_raw <- function(data) {
+  time_mapping <- c(
+    t_paid_work              = "t_to",
+    t_job_search             = "t_to_js",
+    t_care_essential         = "t_tcnr_ce",
+    t_care_education_related = "t_tcnr_re",
+    t_care_other             = "t_tcnr_oac",
+    t_domestic_meals         = "t_tdnr_psc",
+    t_domestic_cleaning      = "t_tdnr_lv",
+    t_domestic_laundry       = "t_tdnr_lrc",
+    t_domestic_maintenance   = "t_tdnr_mrm",
+    t_domestic_admin         = "t_tdnr_admnhog",
+    t_domestic_shopping      = "t_tdnr_comphog",
+    t_domestic_pets          = "t_tdnr_cmp",
+    t_voluntary_community    = "t_tvaoh_tv",
+    t_voluntary_households   = "t_tvaoh_oh",
+    t_personal_care          = "t_cpaf_cp",
+    t_meals                  = "t_cpag_comer",
+    t_sleep                  = "t_cpag_dormir",
+    t_education              = "t_ed",
+    t_leisure_social         = "t_vsyo_csar",
+    t_leisure_hobbies        = "t_vsyo_aa",
+    t_media_reading          = "t_mcm_leer",
+    t_media_audio            = "t_mcm_audio",
+    t_media_video            = "t_mcm_video",
+    t_media_computer         = "t_mcm_computador",
+    t_commute1               = "t_tt1"
+  )
+  data %>% dplyr::rename(any_of(c(.rename_common_eng, time_mapping)))
+}
+
+rename_to_english_enut <- function(data) {
+  data %>% dplyr::rename(any_of(.rename_common_eng))
 }

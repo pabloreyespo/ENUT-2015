@@ -34,7 +34,7 @@ def init_worker(data, covinv, Q, mu):
 if __name__ == "__main__":
 
     social_vars = ["sexo",
-                   "edad_años",
+                   "edad_anios",
                    "quintil_2",
                    "quintil_3",
                    "quintil_4",
@@ -46,7 +46,7 @@ if __name__ == "__main__":
                    "estudia",
                    "trabaja",
                    'macrozona_metropolitana',
-                   "horas_trabajo",
+                   "horas_trabajo_contratadas",
                    "n_menores",
                    "n_personas"]
 
