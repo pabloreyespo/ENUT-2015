@@ -79,7 +79,7 @@ get_data <- function(
   expenditures <<- c(names(free_expenditures), "Ec")
   fixed_income <- c("ing_jub_aps", "ing_gpp")
 
-  model_data <- haven::read_dta("data/enut-i-25G.dta") %>%
+  model_data <- haven::read_dta("data/enut-i-raw.dta") %>%
     filter(edad_anios >= 18, es_trabajador == 1, w > 0, ing_personal > 0, total_expenses/ing_personal <= 5) %>%
     mutate(female = sexo,
            menor25 = edad_anios <  25,
@@ -145,7 +145,7 @@ get_data_tc <- function(especificas = c(), disputed = "t_sleep") {
   exp_1 <- c("alimentos","recreacion","restaurantes","vestimenta","comunicaciones")
   fixed_income <- c("ing_jub_aps", "ing_gpp")
 
-  model_data <- haven::read_dta("data/enut-i-11G.dta")  %>%
+  model_data <- haven::read_dta("data/enut-i.dta")  %>%
     filter(edad_anios >= 18, es_trabajador == 1, ing_personal > 0, w > 0, total_expenses/ing_personal <= 5) %>%
     mutate(female = sexo,
            menor25 = edad_anios <  25,
