@@ -1,0 +1,9 @@
+Lmod Warning:
+-------------------------------------------------------------------------------
+The following dependent module(s) are not currently loaded:
+glibc/2.34-zen4-ed5siie (required by: python/3.12.3-zen4-v)
+-------------------------------------------------------------------------------
+
+
+
+/var/spool/slurmd/job4429920/slurm_script: line 22: 199236 Illegal instruction     (core dumped) python data_processing/gemelos_matriz.py

@@ -1,2 +1,4 @@
 data/raw/*
 !data/raw/raw.zip
+*raw.*
+enut-env/
