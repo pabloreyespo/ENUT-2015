@@ -42,13 +42,14 @@ Rscript models/SEM.R
 ### Data Flow
 
 ```
-data/raw/          ->  data_processing/data_processing.R  ->  data/enut-i-{11,25}.{dta,csv}
-data/raw/ + gastos ->  data_processing/expenditures.R      ->  data/enut-i-{11,25}G.{dta,csv}
-enut-i-*G.csv      ->  models/*.R                          ->  output/
+data/raw/          ->  data_processing/data_processing.R  ->  data/enut-i.{dta,csv}
+data/raw/          ->  data_processing/data_processing.R  ->  data/enut-i-raw.{dta,csv}
+enut-i*.csv        ->  models/*.R                          ->  output/
 ```
 
-- `enut-i-11` / `enut-i-25`: Time allocation datasets with 11 or 25 activity categories
-- `enut-i-*G`: Same datasets with imputed household expenditures appended
+- `enut-i`: Model-ready dataset with aggregated time-use categories and broad expenditure groups
+- `enut-i-raw`: Detailed dataset with 25 time-use activity categories and detailed imputed expenditures
+- `enut-i-ENG` / `enut-i-raw-ENG`: English variable-name copies of the processed and raw datasets
 - `data/raw/` is gitignored (excluded from version control)
 
 ### Core Components

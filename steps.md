@@ -1,16 +1,16 @@
-# Execution Steps for Processing the ENUT-II Pipeline
+# Execution Steps for Processing the ENUT-I Pipeline
 
 Below is the complete step-by-step workflow required to process the data from absolute zero.
 
 ### 1. Run the Expenditures Model Definition
 **Script to run:** `data_processing/expenditures.R`
-- **What it does**: This script loads the EPF surveys (`base-personas-ix-epf-stata.dta` and `base-gastos-ix-epf-stata.dta`). It maps the variables, creates the standard `data/gastos.csv` file, and estimates the Fractional MNL model via Apollo (`FMNL-epf-ix`).
+- **What it does**: This script loads the EPF surveys (`base-personas-viii-epf-(stata).dta` and `base-gastos-viii-epf-(stata).dta`). It maps the variables, creates the standard `data/gastos.csv` file, and estimates the Fractional MNL model via Apollo (`FMNL-epf-viii`).
 - **Why do it now**: The models and the `.csv` generated here are strict dependencies required later when ENUT time records try to impute their budget shares. 
 
 ### 2. Generate the Preliminary ENUT DataFrame
 **Script to run:** `data_processing/data_processing.R` (Only up to Line 64)
 - **What it does**: Execute the script selectively from the top down to `write_csv(..., "data/raw/ENUT_PRE_WEEKEND_IMPUTATION.csv")`. 
-- **Why do it now**: This reads the raw ENUT-II dataset, generates the basic mapping and prefilters, formats variables, runs Vallejo's outlier detection, and spits out the preliminary dataset. The resulting CSV acts as the direct, clean input required by Python in the next step to figure out covariance profiles.
+- **Why do it now**: This reads the raw ENUT-I dataset, generates the basic mapping and prefilters, formats variables, runs Vallejo's outlier detection, and spits out the preliminary dataset. The resulting CSV acts as the direct, clean input required by Python in the next step to figure out covariance profiles.
 - *(Note: Do NOT run past line 64 yet, because R will crash trying to search for the twin matrix we haven't built yet).*
 
 ### 3. Generate the Twin Matrix
@@ -22,4 +22,4 @@ Below is the complete step-by-step workflow required to process the data from ab
 ### 4. Complete the Pipeline
 **Script to run:** `data_processing/data_processing.R` (From Line 66 onwards)
 - **What it does**: Resume execution from `twin_matrix <- read_csv(...)` down to the end of the script.
-- **Why do it now**: Armed with the twin matrix file and the pre-computed expenditure models, this script seamlessly imputes missing weekend diary data (`impute_weekend`), merges activities into their 168-hour groupings (`agregar_actividades` which captures the new `Tw` classifications), pulls expenditure budget shares utilizing the Apollo FMNL models (`imputacion_gastos()`), maps translations (`rename_to_english`), and finally automatically spits out your completed `enut-ii-raw` and `enut-ii` datasets.
+- **Why do it now**: Armed with the twin matrix file and the pre-computed expenditure models, this script seamlessly imputes missing weekend diary data (`impute_weekend`), merges activities into their 168-hour groupings (`agregar_actividades` which captures the new `Tw` classifications), pulls expenditure budget shares utilizing the Apollo FMNL models (`imputacion_gastos()`), maps translations (`rename_to_english`), and finally automatically spits out the completed `enut-i-raw` and `enut-i` datasets in DTA and CSV formats, with English variable-name copies.

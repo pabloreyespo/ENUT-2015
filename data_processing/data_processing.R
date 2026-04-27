@@ -80,16 +80,6 @@ data_post <- data_to168hours(data_post) # TODO probar distintos posicionamientos
 data_descargable <- agregar_actividades(data_post)
 data_raw  <- data_descargable[["data25"]] %>% mutate(w = ing_trab / t_to)
 data_enut <- data_descargable[["data11"]] %>% mutate(w = ing_trab / Tw)
-haven::write_dta(data_raw,  "data/enut-i-25.dta")
-haven::write_dta(data_enut, "data/enut-i-11.dta")
-write_csv(data_raw,  "data/enut-i-25.csv")
-write_csv(data_enut, "data/enut-i-11.csv")
-
-
-source("data_processing/processing_functions.R")
-
-data_raw  <- haven::read_dta("data/enut-i-25.dta")
-data_enut <- haven::read_dta("data/enut-i-11.dta")
 
 table(data_raw$es_trabajador)
 table(data_raw$es_familia)
