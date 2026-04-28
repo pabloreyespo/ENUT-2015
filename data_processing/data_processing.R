@@ -91,16 +91,21 @@ data_enut_G <- imputacion_gastos(data_enut)
 # Agregando las categorias de gasto y limpiando las demas
 data_enut_G <- data_enut_G %>%
   mutate(
-    Ef_food           = alimentos,
-    Ef_recreation     = recreacion,
-    Ef_restaurants    = restaurantes,
+    Ef_food = alimentos,
+    Ef_recreation = recreacion,
+    Ef_restaurants = restaurantes,
     Ef_communications = comunicaciones,
-    Ef_clothing       = vestimenta,
-    Ec = cuentas + hogar + salud + transporte + educacion + savings
+    Ef_clothing = vestimenta,
+    Ec_cuentas = cuentas,
+    Ec_hogar = hogar,
+    Ec_salud = salud,
+    Ec_transporte = transporte,
+    Ec_educacion = educacion,
+    savings = savings,
+    total_expenses = total_expenses
   ) %>%
-  dplyr::select(-c(alimentos, recreacion, restaurantes, comunicaciones,
-                   vestimenta, cuentas, hogar, salud, transporte, educacion,
-                   savings, total_expenses))
+  dplyr::select(-c(alimentos, recreacion, restaurantes, comunicaciones, vestimenta, cuentas, hogar, salud, transporte, educacion))
+
 
 haven::write_dta(data_raw_G,  "data/enut-i-raw.dta")
 haven::write_dta(data_enut_G, "data/enut-i.dta")
