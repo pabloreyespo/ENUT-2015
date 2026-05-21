@@ -22,11 +22,11 @@
 #'   \item{dia_fin_semana}{Weekend day of diary (6 = Saturday, 7 = Sunday)}
 #'
 #'   \item{parentesco}{Relationship to household head}
-#'   \item{n_menores_0_5}{Number of household members under age 6}
-#'   \item{n_menores_6_11}{Number of household members aged 6 to 11}
-#'   \item{n_menores_0_14}{Number of household members under age 15}
-#'   \item{n_menores_12_17}{Number of household members aged 12 to 17}
-#'   \item{n_menores}{Number of household members under 18}
+#'   \item{n_menores_0_4}{Number of household members aged 0 to 4}
+#'   \item{n_menores_5_14}{Number of household members aged 5 to 14}
+#'   \item{n_nna}{Number of household members aged 0 to 14}
+#'   \item{n_menores_18}{Number of household members aged 0 to 18}
+#'   \item{n_personas_15_65}{Number of household members aged 15 to 65}
 #'   \item{n_mayores}{Number of adult household members}
 #'   \item{n_tiempo}{Number of household members who reported time use}
 #'   \item{n_trabajadores}{Number of employed workers in household}

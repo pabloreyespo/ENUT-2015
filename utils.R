@@ -82,12 +82,11 @@ get_data <- function(
   model_data <- haven::read_dta("data/enut-i-raw.dta") %>%
     filter(edad_anios >= 18, es_trabajador == 1, w > 0, ing_personal > 0, total_expenses/ing_personal <= 5) %>%
     mutate(female = sexo,
-           menor25 = edad_anios <  25,
-           mayor45 = edad_anios >= 45,
+            mayor45 = edad_anios >= 45,
            mayor66 = edad_anios >= 60,
            university = nivel_escolaridad ==  'universitaria',
-           underage_in_household = case_when(n_menores >= 1 ~ 1, T ~ 0),
-           children_in_household = case_when(n_menores_0_5 + n_menores_6_11 >= 1 ~ 1, T ~ 0),
+           underage_in_household = case_when(n_menores_18 >= 1 ~ 1, T ~ 0),
+           children_in_household = case_when(n_menores_0_4 + n_menores_5_14 >= 1 ~ 1, T ~ 0),
            only_worker = case_when(n_trabajadores == 1 & trabaja == 1 ~ 1, T ~ 0),
            metropolitana = macrozona == "metropolitana",
            norte = macrozona == "norte",
@@ -148,12 +147,11 @@ get_data_tc <- function(especificas = c(), disputed = "t_sleep") {
   model_data <- haven::read_dta("data/enut-i.dta")  %>%
     filter(edad_anios >= 18, es_trabajador == 1, ing_personal > 0, w > 0, total_expenses/ing_personal <= 5) %>%
     mutate(female = sexo,
-           menor25 = edad_anios <  25,
-           mayor45 = edad_anios >= 45,
+            mayor45 = edad_anios >= 45,
            mayor66 = edad_anios >= 60,
            university = nivel_escolaridad ==  'universitaria',
-           underage_in_household = case_when(n_menores >= 1 ~ 1, T ~ 0),
-           children_in_household = case_when(n_menores_0_5 + n_menores_6_11 >= 1 ~ 1, T ~ 0),
+           underage_in_household = case_when(n_menores_18 >= 1 ~ 1, T ~ 0),
+           children_in_household = case_when(n_menores_0_4 + n_menores_5_14 >= 1 ~ 1, T ~ 0),
            only_worker = case_when(n_trabajadores == 1 & trabaja == 1 ~ 1, T ~ 0),
            metropolitana = macrozona == "metropolitana",
            norte = macrozona == "norte",

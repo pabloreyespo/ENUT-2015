@@ -47,7 +47,7 @@ if __name__ == "__main__":
                    "trabaja",
                    'macrozona_metropolitana',
                    "horas_trabajo_contratadas",
-                   "n_menores",
+                    "n_menores_18",
                    "n_personas"]
 
     data = pl.read_csv("data/raw/ENUT_PRE_WEEKEND_IMPUTATION.csv",

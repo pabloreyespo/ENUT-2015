@@ -66,11 +66,11 @@ t_agregados_new <- c(
 
 identificadores <- c("id_persona", "id_hogar")
 composicion_hogar <- c("parentesco",
-                       "n_menores_0_5",
-                       "n_menores_6_11",
-                       "n_menores_0_14",
-                       "n_menores_12_17",
-                       "n_menores",
+                       "n_menores_0_4",
+                       "n_menores_5_14",
+                       "n_nna",
+                       "n_menores_18",
+                       "n_personas_15_65",
                        "n_mayores",
                        "n_tiempo",
                        "n_trabajadores",
@@ -109,12 +109,11 @@ new_variables_prefilter<- function(data) { # OJO, DEBEN ENTRAR TODOS INDEPENDIEN
   # INFORMACIÓN DEL INDIVIDUO
   data <- data %>%
   mutate(
-    menor_edad        = case_when(c14_1_1 < 18 ~ 1, TRUE ~ 0),
-    menor_0_5         = case_when(c14_1_1 < 6 ~ 1, TRUE ~ 0),
-    menor_6_11        = case_when(c14_1_1 >= 6 & c14_1_1 < 12 ~ 1, TRUE ~ 0),
+    menor_edad        = case_when(c14_1_1 <= 18 ~ 1, TRUE ~ 0),
+    menor_0_4         = case_when(c14_1_1 < 5 ~ 1, TRUE ~ 0),
     menor_0_14        = case_when(c14_1_1 < 15 ~ 1, TRUE ~ 0),
-    menor_12_17       = case_when(c14_1_1 >= 12 & c14_1_1 < 18 ~ 1, TRUE ~ 0),
-    menor25           = case_when(c14_1_1 <= 25 ~ 1, TRUE ~ 0),
+    menor_5_14        = case_when(c14_1_1 >= 5 & c14_1_1 <= 14 ~ 1, TRUE ~ 0),
+    persona_15_65     = case_when(c14_1_1 >= 15 & c14_1_1 <= 65 ~ 1, TRUE ~ 0),
     mayor_edad        = case_when(c14_1_1 >= 18 ~ 1, TRUE ~ 0),
     tercera_edad      = case_when(c14_1_1 >= 60 ~ 1, TRUE ~ 0),
     nivel_escolaridad = case_when(
@@ -134,12 +133,11 @@ new_variables_prefilter<- function(data) { # OJO, DEBEN ENTRAR TODOS INDEPENDIEN
   # COMPOSICIÓN DEL HOGAR
   data <- data %>%
     group_by(id_hogar) %>%
-    mutate(n_menores = sum(menor_edad,na.rm=TRUE),
-           n_menores_0_5  = sum(menor_0_5,  na.rm=TRUE),
-           n_menores_6_11 = sum(menor_6_11, na.rm=TRUE),
-           n_menores_0_14 = sum(menor_0_14, na.rm=TRUE),
-           n_menores_12_17= sum(menor_12_17,na.rm=TRUE),
-           n_menores25 = sum(menor25, na.rm=TRUE),
+    mutate(n_menores_18 = sum(menor_edad,na.rm=TRUE),
+           n_menores_0_4  = sum(menor_0_4,  na.rm=TRUE),
+           n_menores_5_14 = sum(menor_5_14, na.rm=TRUE),
+           n_nna = sum(menor_0_14, na.rm=TRUE),
+           n_personas_15_65 = sum(persona_15_65, na.rm=TRUE),
            n_mayores = sum(mayor_edad,na.rm=TRUE),
            n_tercera_edad = sum(tercera_edad,na.rm=TRUE),
            n_tiempo = sum(tiempo),
@@ -147,7 +145,7 @@ new_variables_prefilter<- function(data) { # OJO, DEBEN ENTRAR TODOS INDEPENDIEN
            n_profesionales = sum(nivel_escolaridad >=4 ),
            edad_promedio = mean(c14_1_1)) %>%
     mutate(hay_tercera_edad = case_when(n_tercera_edad > 1 ~ 1 & tercera_edad == 0,  T ~ 0),
-           n_personas = n_menores + n_mayores) %>%
+           n_personas = n_menores_18 + n_mayores) %>%
     ungroup()
 
   # AYUDAS QUE RECIBE EL HOGAR
@@ -262,7 +260,7 @@ new_variables_postfilter <- function(data) {
                                   edad_anios <=65 ~ "45-65",
                                   T            ~ "66+"),
            estudia = abs(abs(d14_1_1-1)-1),
-           n_menores  = case_when(n_menores  <= 3 ~ n_menores , T ~ 4),
+           n_menores_18  = case_when(n_menores_18  <= 3 ~ n_menores_18 , T ~ 4),
            n_mayores = case_when(n_mayores <= 5 ~ n_mayores, T ~ 6),
            nivel_escolaridad = case_when( # todos los niveles son completos, excepto el inicial
              nivel_escolaridad == 1 ~ "ninguna",
@@ -615,13 +613,12 @@ agregar_actividades <- function(data_post) {
 imputacion_gastos <- function(data) {
   library("minpack.lm")
   data_hogar <- data %>%
-    dplyr::select(id_hogar, n_personas, n_menores_0_5, n_menores_6_11, n_menores_12_17, n_menores, n_trabajadores, n_personas,
+    dplyr::select(id_hogar, n_personas, n_menores_0_4, n_menores_5_14, n_menores_18, n_trabajadores, n_personas,
                   edad_promedio, quintil, macrozona, ingreso_hogar, income_person_week, n_profesionales) %>%
     distinct(id_hogar, .keep_all = T) %>%
     mutate(n_personas_cut      = case_when(n_personas      >= 7 ~ 7, T ~ n_personas),
-           n_menores_0_5_cut   = case_when(n_menores_0_5   >= 3 ~ 3, T ~ n_menores_0_5),
-           n_menores_6_11_cut  = case_when(n_menores_6_11  >= 2 ~ 3, T ~ n_menores_6_11),
-           n_menores_12_17_cut = case_when(n_menores_12_17 >= 2 ~ 3, T ~ n_menores_12_17),
+           n_menores_0_4_cut   = case_when(n_menores_0_4   >= 3 ~ 3, T ~ n_menores_0_4),
+           n_menores_5_14_cut  = case_when(n_menores_5_14  >= 2 ~ 3, T ~ n_menores_5_14),
            n_trabajadores_cut  = case_when(n_trabajadores  >= 3 ~ 3, T ~ n_trabajadores),
            n_profesionales_cut = case_when(n_profesionales >= 2 ~ 3, T ~ n_profesionales))
   #hist(gastos$savings/gastos$ingresos, breaks =100)
@@ -631,7 +628,7 @@ imputacion_gastos <- function(data) {
   lin_reg <<- lm(savings ~
                      ingreso_hogar +
                      (quintil==2) + (quintil==3) + (quintil==4) + (quintil==5) +
-                     n_menores_0_5_cut + n_menores_6_11_cut + n_menores_12_17_cut + n_personas_cut +
+                     n_menores_0_4_cut + n_menores_5_14_cut + n_personas_cut +
                      n_trabajadores_cut  + n_profesionales_cut +
                      edad_promedio +
                      (macrozona == "metropolitana") ,
@@ -713,11 +710,11 @@ imputacion_gastos <- function(data) {
   weekend_day          = "dia_fin_semana",
   # household composition
   relationship_to_head = "parentesco",
-  n_children_0_5       = "n_menores_0_5",
-  n_children_6_11      = "n_menores_6_11",
-  n_children_0_14      = "n_menores_0_14",
-  n_youth_12_17        = "n_menores_12_17",
-  n_underage           = "n_menores",
+  n_children_0_4       = "n_menores_0_4",
+  n_children_5_14      = "n_menores_5_14",
+  n_children_0_14      = "n_nna",
+  n_underage           = "n_menores_18",
+  n_persons_15_65      = "n_personas_15_65",
   n_adults             = "n_mayores",
   n_time_reporters     = "n_tiempo",
   n_workers            = "n_trabajadores",
