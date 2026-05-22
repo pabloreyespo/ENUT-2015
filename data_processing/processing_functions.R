@@ -98,7 +98,7 @@ sociodemograficas <- c("sexo",
                        "prop_ing_hogar")
 laborales <- c("cae", "cise", "ciuo_agrupada")
 proveedores_externos <- c("servicio_domestico", "ayuda_cercanos", "fuentes_externas")
-ingresos     <- c("ing_ocuppal", "ing_trab", "ing_jub_aps", "ing_g", "ing_mon", "ing_mon_pc", "ing_gpp", "ing_personal", "ingreso_hogar" ,"income_person_week")
+ingresos     <- c("ing_ocuppal", "ing_trab", "ing_jub_aps", "ing_g", "ing_mon", "ing_mon_pc", "ing_gpp", "ing_personal", "ingreso_hogar" ,"income_person_week", "I")
 tipo_muestra <- c("es_trabajador", "es_familia")
 
 new_variables_prefilter<- function(data) { # OJO, DEBEN ENTRAR TODOS INDEPENDIENTE DE SI DECLARAN TIEMPO O NO
@@ -175,8 +175,8 @@ new_variables_prefilter<- function(data) { # OJO, DEBEN ENTRAR TODOS INDEPENDIEN
     group_by(id_hogar) %>% mutate(prop_ing_hogar = ingreso_personal / sum(ingreso_personal))%>%
     ungroup() %>%
     mutate_at(c("prop_ing_hogar", "ingreso_hogar", "ing_gpp", "income_person_week", "ingreso_personal"),
-              ~replace_na(.,0))
-
+              ~replace_na(.,0)) %>%
+    mutate(I = ing_jub_aps + ing_g)
   return(data)
 }
 
