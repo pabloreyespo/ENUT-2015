@@ -47,8 +47,11 @@ if __name__ == "__main__":
                    "trabaja",
                    'macrozona_metropolitana',
                    "horas_trabajo_contratadas",
-                    "n_menores_18",
-                   "n_personas"]
+                    "n_menores_0_4",
+                    "n_menores_5_14",
+                    "n_personas_15_65",
+                    "n_tercera_edad",
+                   ]
 
     data = pl.read_csv("data/raw/ENUT_PRE_WEEKEND_IMPUTATION.csv",
                        infer_schema_length=100000,

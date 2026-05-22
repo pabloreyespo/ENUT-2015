@@ -155,7 +155,7 @@ apollo_control <- list(
   modelDescr      = "Fractional MNL model on time use data",
   indivID         = "id_hogar",
   outputDirectory = "output",
-  nCores = 1)
+  nCores = 22)
 
 database <- gastos
 database[,names(codigos)] <- database[, names(codigos)] / rowSums(database[, names(codigos)])
@@ -211,4 +211,3 @@ apollo_probabilities <- function(apollo_beta, apollo_inputs, functionality="esti
 model = apollo_estimate(apollo_beta, apollo_fixed, apollo_probabilities, apollo_inputs)
 apollo_modelOutput(model)
 apollo_saveOutput(model)
-apollo_loadModel("output/FMNL")
